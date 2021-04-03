@@ -10,6 +10,16 @@ module.exports = {
   organizationName: 'hotg-ai', // Usually your GitHub org/user name.
   projectName: 'rune', // Usually your repo name.
   themeConfig: {
+
+    forceDarkMode: true,
+    colorMode: {
+      // "light" | "dark"
+      defaultMode: 'dark',
+
+      // Hides the switch in the navbar
+      // Useful if you want to support a single color mode
+      disableSwitch: true
+    },
     navbar: {
       title: 'Rune',
       logo: {
