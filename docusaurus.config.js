@@ -2,7 +2,7 @@
 module.exports = {
   title: 'Rune',
   tagline: 'Containerizing TinyML Applications',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://dev-hotg-ai.firebaseapp.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -13,7 +13,7 @@ module.exports = {
     navbar: {
       title: 'Rune',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Rune',
         src: 'img/logo.svg',
       },
       items: [
@@ -23,9 +23,9 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
+        {href: 'https://tinyverse.substack.com', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/hotg-ai/rune',
           label: 'GitHub',
           position: 'right',
         },
@@ -46,17 +46,17 @@ module.exports = {
         {
           title: 'Community',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
+            // {
+            //   label: 'Stack Overflow',
+            //   href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+            // },
+            // {
+            //   label: 'Discord',
+            //   href: 'https://discordapp.com/invite/docusaurus',
+            // },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: 'https://twitter.com/hotg_ai',
             },
           ],
         },
@@ -65,7 +65,7 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              to: 'blog',
+              href: 'https://tinyverse.substack.com',
             },
             {
               label: 'GitHub',
@@ -74,7 +74,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} HOTG-ai, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
@@ -85,14 +85,14 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/hotg-ai/dev.hotg.ai/edit/master/docs/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
-        },
+        // blog: {
+        //   showReadingTime: true,
+        //   // Please change this to your repo.
+        //   editUrl:
+        //     'https://github.com/hotg-ai/dev.hotg.ai/edit/master/blog/',
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
