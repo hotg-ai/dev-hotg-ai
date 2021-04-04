@@ -8,28 +8,29 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Easy to Use',
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    title: 'Rune',
+    subtitle: 'TinyContainers',
+    imageUrl: 'img/logo.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Rune was designed to help you containerize TinyML applications across devices. Think <code>docker but tinier</code>.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    title: 'Hammer',
+    subtitle: 'Deploy and Manage',
+    imageUrl: 'img/logo.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Hammer lets you deploy and manage your containers across devices and platforms. 
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: 'TinyVerse',
+    subtitle: 'A whole host of tools and protocols',
+    imageUrl: 'img/logo.svg',
     description: (
       <>
         Extend or customize your website layout by reusing React. Docusaurus can
@@ -39,7 +40,7 @@ const features = [
   },
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({imageUrl, title, subtitle, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
@@ -49,6 +50,7 @@ function Feature({imageUrl, title, description}) {
         </div>
       )}
       <h3>{title}</h3>
+      <h4><i>{subtitle}</i></h4>
       <p>{description}</p>
     </div>
   );

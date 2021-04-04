@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'Rune',
-  tagline: 'Containerizing TinyML Applications',
+  title: 'HOTG-ai',
+  tagline: 'Tools to build, deploy and manage your tinyverse',
   url: 'https://dev-hotg-ai.firebaseapp.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
