@@ -8,7 +8,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'hotg-ai', // Usually your GitHub org/user name.
-  projectName: 'rune', // Usually your repo name.
+  projectName: 'dev.hotg.ai', // Usually your repo name.
   themeConfig: {
 
     forceDarkMode: true,
@@ -21,9 +21,9 @@ module.exports = {
       disableSwitch: true
     },
     navbar: {
-      title: 'Rune',
+      title: 'TinyVerse',
       logo: {
-        alt: 'Rune',
+        alt: 'TinyVerse',
         src: 'img/logo.svg',
       },
       items: [
@@ -31,6 +31,11 @@ module.exports = {
           to: 'docs/',
           activeBasePath: 'docs',
           label: 'Docs',
+          position: 'left',
+        },
+        {
+          to: 'runevm',
+          label: 'RuneVM',
           position: 'left',
         },
         {href: 'https://tinyverse.substack.com', label: 'Blog', position: 'left'},
@@ -106,6 +111,9 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        pages: {
+          
+        }
       },
     ],
   ],
