@@ -2,7 +2,7 @@
 module.exports = {
   title: 'HOTG-ai',
   tagline: 'Tools to build, deploy and manage your tinyverse',
-  url: 'https://dev-hotg-ai.firebaseapp.com',
+  url: 'https://hotg.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
