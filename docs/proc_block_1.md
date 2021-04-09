@@ -37,10 +37,11 @@ runic-types = { path = "../../runic-types" }
 ## Logic
 
 The `lib.rs` should contain the following components.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. `no_std` environment
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. `runic_types::Transform` module
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. struct
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Transform method
+
+1. `no_std` environment
+2. `runic_types::Transform` module
+3. struct
+4. Transform method
 
 Processing Blocks are implemented as structs with a transform method hence 3. and 4. are necessary components.
 
