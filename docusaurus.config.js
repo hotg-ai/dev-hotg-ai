@@ -110,6 +110,10 @@ module.exports = {
         // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+          prism: {
+            theme: require('prism-react-renderer/themes/dracula'),
+            additionalLanguages: ['rust'],
+          },
         },
         pages: {
           

@@ -3,11 +3,11 @@ title: Intro to Runes
 sidebar_label: Intro to Runes
 slug: /
 ---
-This will be a  walkthrough on creating a rune to predict which gesture is being made by a device (using the accelerometer).
+This will be a walkthrough on creating a rune to predict which gesture is being made by a device (using the accelerometer).
 
 ## Installation & Dependencies
 
-You will need to install rust on your device. You can follow their [offical documentation](https://doc.rust-lang.org/book/ch01-01-installation.html) to do so.
+You will need to install rust on your device. You can follow their [official documentation](https://doc.rust-lang.org/book/ch01-01-installation.html) to do so.
 
 The next step is to have the required dependencies installed. Run the following commands in your terminal.
 
