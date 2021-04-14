@@ -76,7 +76,7 @@ The `OUT` directive sends the data to be consumed by the host  device. serial ou
 
 Populate the Runefile with the following:
 
-```rust
+```rust title="Runefile"
 FROM runicos/base
 
 CAPABILITY<f32[128, 3]> accelerometer ACCEL -n 128
@@ -92,16 +92,16 @@ OUT SERIAL
 RUN accelerometer normalize gesture gesture_agg serial
 ```
 
->CAPABILITY will process incoming data into a floating point `128 * 3` array.
+CAPABILITY will process incoming data into a floating point `128 * 3` array.
 
->The normalize PROC_BLOCK is used to compress the incoming data between 0 and 1.
+The normalize PROC_BLOCK is used to compress the incoming data between 0 and 1.
 
->The data is then run through the tflite MODEL producing an output of 4 floating point numbers with different levels of confidence of the model (i.e. `[0.0, 1.0, 0.0, 0.0]`).
+The data is then run through the tflite MODEL producing an output of 4 floating point numbers with different levels of confidence of the model (i.e. `[0.0, 1.0, 0.0, 0.0]`).
 
->The gesture_agg PROC_BLOCK takes the ouptut of the model, and returns a UTF8 from the labels provided (`--labels=Wing, Ring, Slope, Unknown`)
+The gesture_agg PROC_BLOCK takes the ouptut of the model, and returns a UTF8 from the labels provided (`--labels=Wing, Ring, Slope, Unknown`)
 (example output based on previous model output: `Ring`).
 
->The UTF8 label is then sent to the serial which can be read by whichever device the rune is being deployed to.
+The UTF8 label is then sent to the serial which can be read by whichever device the rune is being deployed to.
 
 ### Processing Blocks
 

@@ -1,6 +1,6 @@
 ---
 title: Implementation of a Processing Block
-sidebar_label: Components of a Processing Block
+sidebar_label: Proc Block Implementation
 ---
 
 ## Intro
@@ -37,7 +37,7 @@ cargo new gesture_agg --lib
 
 The `runic_types` library needs to be added to the generated Cargo.toml file under dependencies.
 
-```rust
+```rust title="Cargo.toml"
 [dependencies]
 runic-types = { path = "../../runic-types" }
 ```
@@ -48,7 +48,7 @@ Now that the setup is complete, we can focus our attention to the lib.rs file wh
 
 Let's begin by using the template from the previous tutorial to populate our lib.rs file.
 
-```rust
+```rust title="src/lib.rs"
 #![no_std]
 
 use runic_types::Transform;
@@ -77,7 +77,7 @@ It will become extremely messy if we were to write the logic behind choosing the
 
 We will need a few different functions to find the correct gesture. We'll need an `add_history` function to add and update the history of confidences. A `most_likely_gesture` function to identify the most probably gesture. A `label_for_index` function to be able to call the index of the most likely gesture. `with_throttle_interval` function to prevent an excessive number of gesture being added to the history in quick succession. A `with_labels` function to match the confidence values with the labels provided in the Runefile. Finally, we'll also need a `new` function where we can add all the common properties of the other functions.
 
-```rust
+```rust title="src/lib.rs"
 pub struct GestureAgg<const N: usize> {
     ...
 }
@@ -142,7 +142,7 @@ impl<const N: usize> GestureAgg<N> {
 
 In the `new` function, `max_capacity`, `unknown`, and `throttle_interval` were assigned to some constants. Let's add them in above the newly created implementation.
 
-```rust
+```rust title="src/lib.rs"
 const MAX_CAPACITY: usize = 1024;
 const UNKNOWN_LABEL: &'static str = "<MISSING>";
 const DEFAULT_THROTTLE_INTERVAL: usize = 16;
@@ -150,7 +150,7 @@ const DEFAULT_THROTTLE_INTERVAL: usize = 16;
 
 The `GestureAgg` structure needs to be defined.
 
-```rust
+```rust title="src/lib.rs"
 pub struct GestureAgg<const N: usize> {
     genericParameter: N,
 }
@@ -158,7 +158,7 @@ pub struct GestureAgg<const N: usize> {
 
 The generic parameter needs to be replaced by the definitions of the parameters which are in the `new` function.
 
-```rust
+```rust title="src/lib.rs"
 pub struct GestureAgg<const N: usize> {
     labels: [&'static str; N],
     history: VecDeque<[f32; N]>,
@@ -171,7 +171,7 @@ pub struct GestureAgg<const N: usize> {
 
 Notice that since we are using VecDeque in the processing block, we need to declare the VecDeque module. Add the `use` declaration below the `runic_types` declaration.
 
-```rust
+```rust title="src/lib.rs"
 #![no_std]
 
 use runic_types::Transform;
@@ -180,7 +180,7 @@ use alloc::collections::VecDeque;
 
 Now that all the functions work, we need to put them together in the Transform method. Add the following to the `transform` function in the `Transform` method.
 
-```rust
+```rust title="src/lib.rs"
     fn transform(&mut self, input: [f32; N]) -> Self::Output {
 
         self.add_history(input);
@@ -198,9 +198,9 @@ Now that all the functions work, we need to put them together in the Transform m
     }
 ```
 
-There is just 1 more step needed for the proc block to work. We need to add a `Default` method with a `default` function. This can be added to the end of the processing block outside the `Transform` method.
+There is just one more step needed for the proc block to work. We need to add a `Default` method with a `default` function. This can be added to the end of the processing block outside the `Transform` method.
 
-```rust
+```rust title="src/lib.rs"
 impl<const N: usize> Default for GestureAgg<N> {
     fn default() -> Self { GestureAgg::new() }
 }
