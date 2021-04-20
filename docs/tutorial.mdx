@@ -3,16 +3,88 @@ title: Intro to Runes
 sidebar_label: Intro to Runes
 slug: /
 ---
-This will be a walkthrough on creating a rune to predict which gesture is being made by a device (using the accelerometer).
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## Installation & Dependencies
+Rune is a containerization technology for deploying TinyML applications to extremely constraint devices.
 
-You will need to install rust on your device. You can follow their [official documentation](https://doc.rust-lang.org/book/ch01-01-installation.html) to do so.
+This will be a walkthrough on creating a rune to predict which gesture is being made by a device (using the devices accelerometer).
 
-The next step is to have the required dependencies installed. Run the following commands in your terminal.
+## Dependencies
 
-1. `rustup install nightly` if you already have nightly installed, make sure you are running the latest version with `rustup update nightly`
-2. `rustup target add wasm32-unknown-unknown`
+The `rune` tool turns a Runefile into Rust code which is compiled to WebAssembly, so you will need to have the [**rust compiler**](https://rustup.rs/) installed.
+
+We use the nightly compiler as it has some features which have not yet been added to the stable rust version.
+
+```console
+$ rustup toolchain install nightly
+```
+
+If you already have nightly installed, make sure you are running the latest version.
+
+```console
+$ rustup update nightly
+```
+
+Set nightly as your default.
+
+```console
+$ rustup default nightly
+```
+
+Compiling to WebAssembly requires copies of Rust's core libraries cross-compiled to `wasm32-unknown-unknown`.
+
+```console
+$ rustup target add wasm32-unknown-unknown
+```
+
+## Installation
+
+Runes can be built and run using our `rune` command-line tool. There are 2 ways to set this up on your device.
+
+### Cargo Install
+
+Extremely simple cargo command to install the command-line tool.
+
+```console
+$ cargo install --git https://github.com/hotg-ai/rune rune
+```
+
+:::note
+It might take a long time to download and compile the rune command-line tool.
+:::
+
+### Nightly Release
+
+Alternatively, you can download our pre-compiled binaries from Github Releases under the [Nightly Release](https://github.com/hotg-ai/rune/releases/tag/nightly).
+
+Install the `rune.x86_64- .zip` which matches your operating system. The file can be extracted in your location of choice.
+
+There are a few additional steps we need to take to be able to use the command-line tool. Begin by entering the `rune.x86_64- ` directory.
+
+<Tabs
+  groupId="operating-systems"
+  defaultValue="mac"
+  values={[
+    {label: 'macOS', value: 'mac'},
+    {label: 'Linux', value: 'linux'},
+  ]
+}>
+  <TabItem value="mac"><pre><code>$ cd rune.x86_64-apple-darwin</code></pre></TabItem>
+  <TabItem value="linux"><pre><code>$ cd rune.x86_64-unknown-linux-gnu</code></pre></TabItem>
+</Tabs> <br />
+
+The `rune` binary is not yet a binary, it is a simple text file. We need to convert this into a Unix executable.
+
+```console
+$ chmod +x rune
+```
+
+Now we need to move the `rune` binary to where the other rust binaries are located.
+
+```console
+$ mv rune ~/.cargo/bin/
+```
 
 ## Creating a Project
 
@@ -134,4 +206,4 @@ You can run the Rune with test data which has been provided in the `docs/tutoria
 
 `example_ring.csv` contains data similar to what an accelerometer would collect if a ring gesture was made.
 
-The Serial output of running the above command should be "Ring"
+The Serial output of running the above command should be `Ring`.
