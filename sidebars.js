@@ -2,7 +2,7 @@ module.exports = {
   docs: [
     {
       type: 'category',
-      label: 'Docusaurus Tutorial',
+      label: 'Tutorial',
       items: [
         'tutorial',
         'proc_block_1',

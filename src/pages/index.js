@@ -8,9 +8,9 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Rune',
-    subtitle: 'TinyContainers',
-    imageUrl: 'img/logo.svg',
+    title: 'Development Warp speed',
+    subtitle: 'Accelerate development of TinyML apps using Containers',
+    imageUrl: 'img/dev_speed.svg',
     description: (
       <>
         Rune was designed to help you containerize TinyML applications across devices. Think <code>docker but tinier</code>.
@@ -18,9 +18,9 @@ const features = [
     ),
   },
   {
-    title: 'Hammer',
-    subtitle: 'Deploy and Manage',
-    imageUrl: 'img/logo.svg',
+    title: 'Automate your deployments',
+    subtitle: 'Reliably deploy TinyML to your apps',
+    imageUrl: 'img/reliable_dev.svg',
     description: (
       <>
         Hammer lets you deploy and manage your containers across devices and platforms. 
@@ -30,7 +30,7 @@ const features = [
   {
     title: 'TinyVerse',
     subtitle: 'A whole host of tools and protocols',
-    imageUrl: 'img/logo.svg',
+    imageUrl: 'img/orchestrate.svg',
     description: (
       <>
         Extend or customize your website layout by reusing React. Docusaurus can

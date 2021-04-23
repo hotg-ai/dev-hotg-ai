@@ -30,14 +30,14 @@ module.exports = {
         {
           to: 'docs/',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'Documentation',
           position: 'left',
         },
-        {
-          to: 'runevm',
-          label: 'RuneVM',
-          position: 'left',
-        },
+        // {
+        //   to: 'runevm',
+        //   label: 'RuneVM',
+        //   position: 'left',
+        // },
         {href: 'https://tinyverse.substack.com', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/hotg-ai/rune',

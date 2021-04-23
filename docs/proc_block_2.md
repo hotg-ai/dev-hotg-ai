@@ -1,6 +1,6 @@
 ---
-title: Implementation of a Processing Block
-sidebar_label: Components of a Processing Block
+title: Implementing a Processing Block
+sidebar_label: Implementing a Processing Block
 ---
 
 ## Intro
