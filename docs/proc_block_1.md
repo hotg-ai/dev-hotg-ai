@@ -1,6 +1,6 @@
 ---
 title: Components of a Processing Block
-sidebar_label: Components of a Processing Block
+sidebar_label: Proc Block Components
 ---
 
 Processing Blocks are used to pre- and post- process data.
@@ -29,7 +29,7 @@ Each processing block has 2 components
 
 Processing blocks are dependent on the runic_types library. This can be added to the Cargo.toml file in the processing block.
 
-```rust
+```rust title="Cargo.toml"
 [dependencies]
 runic-types = { path = "../../runic-types" }
 ```
