@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Develop at warp speed',
+    title: 'Development at warp speed',
     subtitle: 'Accelerate development of TinyML apps with Rune',
     imageUrl: 'img/dev_speed.svg',
     description: (
