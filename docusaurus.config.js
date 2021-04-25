@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'HOTG-ai',
-  tagline: 'Tools to build, deploy and manage your tinyverse',
+  title: 'HOTG.AI',
+  tagline: 'Tools to build, deploy and manage TinyML apps',
   url: 'https://hotg.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -39,6 +39,7 @@ module.exports = {
         //   position: 'left',
         // },
         {href: 'https://tinyverse.substack.com', label: 'Blog', position: 'left'},
+        {href: 'https://hotg.ai', label: 'hotg.ai', position: 'right'},
         {
           href: 'https://github.com/hotg-ai/rune',
           label: 'GitHub',
@@ -53,7 +54,7 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Getting Started',
+              label: 'Get Started',
               to: 'docs/',
             },
           ],
@@ -89,7 +90,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} HOTG-ai, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} hotg.ai inc. Built with Docusaurus.`,
     },
   },
   presets: [

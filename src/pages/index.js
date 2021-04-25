@@ -8,33 +8,41 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Development Warp speed',
-    subtitle: 'Accelerate development of TinyML apps using Containers',
+    title: 'Develop at warp speed',
+    subtitle: 'Accelerate development of TinyML apps with Rune',
     imageUrl: 'img/dev_speed.svg',
     description: (
       <>
-        Rune was designed to help you containerize TinyML applications across devices. Think <code>docker but tinier</code>.
+        Rune is a tiny container specifically designed to help you containerize TinyML applications across several platforms and devices. It is like docker but tinier.
+        <br/><br/><code>$ touch ./Runefile</code>
+        <br/><code>$ rune build ./Runefile</code>
+        <br/><code>$ rune run my.rune</code>
       </>
     ),
   },
   {
-    title: 'Automate your deployments',
-    subtitle: 'Reliably deploy TinyML to your apps',
+    title: 'Automated repeatable deployments',
+    subtitle: 'Reliably deploy TinyML models in your apps',
     imageUrl: 'img/reliable_dev.svg',
     description: (
       <>
-        Hammer lets you deploy and manage your containers across devices and platforms. 
+        Reliable and repeatable builds are the hallmark of production grade systems. Hammer lets you deploy and manage your containers across devices and platforms. 
+        <br/><br/><code>$ hmr XXXX?</code>
       </>
     ),
   },
   {
-    title: 'TinyVerse',
-    subtitle: 'A whole host of tools and protocols',
+    title: 'Device native orchestration',
+    subtitle: 'Tools and protocols for the Tinyverse',
     imageUrl: 'img/orchestrate.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        We are working on building the orchestration platform for the TinyML universe, we call it <a target="_new" href="https://tinyverse.substack.com/p/hello-tinyverse?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">Tinyverse</a>.
+        <br/>You can read more about our ideas on <a target="_new" href="https://tinyverse.substack.com/p/device-native-orchestration-the-future?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">The Future of Orchestration on the Edge</a> blog.
+        <br/><br/><code>Rune - Build TinyML apps</code>
+        <br/><code>Hammer - Deploy production TinyML apps</code>
+        <br/><code>Anvil - Target multiple devices</code>
+        <br/><code>Saga - Run and scale production TinyML apps</code>
       </>
     ),
   },
@@ -61,7 +69,7 @@ export default function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`TinyML tools from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <header className={clsx('hero hero--dark', styles.heroBanner)}>
         <div className="container">
