@@ -15,5 +15,12 @@ module.exports = {
         // 'thank-you',
       ],
     },
+    {
+      type: 'category',
+      label: 'Rune VM',
+      items: [
+        'rune-vm',
+      ],
+    },
   ],
 };
