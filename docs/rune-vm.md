@@ -1,6 +1,6 @@
 ---
-title: Rune VM
-sidebar_label: Rune VM
+title: Rune VM Guide
+sidebar_label: Guide
 ---
 ## Overview
 
@@ -37,7 +37,7 @@ C++ SDK for running Runes.
     + [Create the context objects](#create-the-context-objects)
     + [Load the Rune(-s)](#load-the-rune--s-)
     + [Run the Rune(-s)](#run-the-rune--s-) -->
-    
+  
 ## Build
 
 Tested on macOS Big Sur 11.1.
@@ -242,7 +242,7 @@ The easiest way to understand the interface is to checkout examples. They are lo
 
 #### Implement the logger
 
-```c++
+```cpp
 struct StdoutLogger : public rune_vm::ILogger {
     void log(
         const rune_vm::Severity severity,
@@ -263,7 +263,7 @@ You must provide the delegate for each capability your Rune needs. You might imp
 
 Delegate' callbacks are invoked when you load Rune or call IRune::call().
 
-```c++
+```cpp
 struct AllInOneDelegate : public rune_vm::capabilities::IDelegate {
         AllInOneDelegate(const rune_vm::ILogger::CPtr& logger)
             : m_supportedCapabilities(g_supportedCapabilities.begin(), g_supportedCapabilities.end()) {}
@@ -335,7 +335,7 @@ struct AllInOneDelegate : public rune_vm::capabilities::IDelegate {
 
 First, you create the context - those objects are likely to be created only once per run.
 
-```c++
+```cpp
 // create rune_vm context
 // logger is kept alive as shared_ptr inside rune_vm objects
 auto logger = std::make_shared<StdoutLogger>();
@@ -353,7 +353,7 @@ Do not change the constructor arguments unless you know what you are doing.
 
 Then, load one or multiple runes. The context is shared between runes, but the delegates shouldn't be shared between them. Note that you may pass multiple delegates to the IRuntime::loadRune function. This is because you can have e.g. single delegate per implemented capability. It's up to you, just make sure delegates' supported capability don't overlap between each other.
 
-```c++
+```cpp
 auto delegate = std::make_shared<AllInOneDelegate>(logger);
 auto rune = runtime->loadRune({delegate}, pathToRuneFile);
 ```
@@ -362,7 +362,7 @@ auto rune = runtime->loadRune({delegate}, pathToRuneFile);
 
 Now you have everything setup already. Now all you have to do is to update delegates' input and call IRune::call().
 
-```c++
+```cpp
 while(true) {
     // update the input
     delegate->setInput(data, length);

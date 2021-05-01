@@ -2,7 +2,7 @@ module.exports = {
   docs: [
     {
       type: 'category',
-      label: 'Tutorial',
+      label: 'Runes',
       items: [
         'tutorial',
         'proc_block_1',
@@ -20,6 +20,7 @@ module.exports = {
       label: 'Rune VM',
       items: [
         'rune-vm',
+        'rune-vm-example',
       ],
     },
   ],
