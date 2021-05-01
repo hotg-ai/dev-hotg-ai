@@ -27,7 +27,10 @@ const features = [
     description: (
       <>
         Reliable and repeatable builds are the hallmark of production grade systems. Hammer lets you deploy and manage your containers across devices and platforms. 
-        <br/><br/><code>$ hmr XXXX?</code>
+        <br/><br/><code>r = hmr.Rune(org,name,runefile,version)</code>
+        <br/><code>r.get_data() #get data</code>
+        <br/><code>r.set_model(m_loc) # add new models</code>
+        <br/><code>r.deploy() # rebuild and deploy rune</code>
       </>
     ),
   },
