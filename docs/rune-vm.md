@@ -236,7 +236,7 @@ Caveats:
 
 ### Examples
 
-The easiest way to understand the interface is to checkout examples. They are located in the rune_vm/examples directory.
+The easiest way to understand the interface is to checkout [examples](rune-vm-example.md).
 
 ### How to use
 
