@@ -23,5 +23,12 @@ module.exports = {
         'rune-vm-example',
       ],
     },
+    {
+      type: 'category',
+      label: '2048 Rust Example',
+      items: [
+        'setup',
+      ],
+    },
   ],
 };
