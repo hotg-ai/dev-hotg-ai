@@ -31,6 +31,9 @@ module.exports = {
         },
       ],
     },
-    
+    {
+      type: 'doc',
+      id: 'contribute'
+    }
   ],
 };
