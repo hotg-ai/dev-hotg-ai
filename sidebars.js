@@ -32,6 +32,13 @@ module.exports = {
       ],
     },
     {
+      type: 'category',
+      label: 'Develop with Rune',
+      items: [
+        'develop/hello_world'
+      ]
+    },
+    {
       type: 'doc',
       id: 'contribute'
     }
