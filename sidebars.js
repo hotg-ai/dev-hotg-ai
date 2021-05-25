@@ -5,8 +5,13 @@ module.exports = {
     },
     {
       type: 'doc',
+      id: 'get_help'
+    },
+    {
+      type: 'doc',
       id: 'overview'
     },
+    
     {
       type: 'doc',
       id: 'get_rune'
