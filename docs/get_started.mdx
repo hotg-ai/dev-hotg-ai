@@ -188,7 +188,7 @@ We are going to run the food.rune file and ask it to predict what is in the rame
 
 ```shell
 # Run the docker to call rune run command
-$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune  --capability=image:./ramen.jpg
+$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
 
 # you should see an output like this
 
@@ -278,7 +278,7 @@ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/ru
 ... 
 
 # Run the docker to call rune run command
-$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune  --capability=image:./ramen.jpg
+$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
 
 # you should see an output like this
 
@@ -361,7 +361,7 @@ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/ru
 ... 
 
 # Run the docker to call rune run command
-$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune  --capability=image:./ramen.jpg
+$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
 
 # you should see an output like this
 
@@ -450,7 +450,7 @@ So here is how it can work on windows:
 ```shell
 docker run -v /d/mydir/food:/d/mydir/food -w /d/mydir/food  -i -t tinyverseml/rune-cli /usr/local/bin/rune build Runefile.yaml
 
-docker run -v /d/mydir/food:/d/mydir/food -w /d/mydir/food  -i -t tinyverseml/rune-cli /usr/local/bin/rune run --capability=image:./ramen.jpg
+docker run -v /d/mydir/food:/d/mydir/food -w /d/mydir/food  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
 
 docker run -e RUST_LOG=INFO -v /d/mydir/food/static:/app/static tinyverseml/rune-serve
 ```
