@@ -8,6 +8,8 @@ easier to use you can leverage docker! Our images are available on [docker hub](
 
 ## Docker (Recommended)
 
+### Rune Cli
+
 You can use `docker run` to use `rune-cli` directly in your local directory. The following shell script will execute `rune-cli` using volumes in your local directory.
 ```
 #! sh
@@ -15,6 +17,13 @@ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/ru
 ```
 
 Save the shell script in your PATH variable and you are ready to go!
+
+### Rune-Serve
+Similarly the rune-serve tool is also available as a docker container and can be run with the following command:
+
+```
+docker run -e RUST_LOG=INFO -v `pwd`:/app/static tinyverseml/rune-serve
+```
 
 
 ### Setting 
