@@ -1,15 +1,15 @@
 ---
-title: TinyVerse Platform overview
+title: Tinyverse Platform overview
 sidebar_label: Platform overview
 keywords: rune, platform, introduction, documentation, about, technology, understanding
 ---
 
-TinyVerse is an open platform for containerizing, shipping and running TinyML applications. 
+Tinyverse is an open platform for containerizing, shipping and running TinyML applications. 
 Rune decouples your ML application from the underlying hardware. Using Rune you can
 build, test and deploy your ML models faster to a variety of end devices. 
 
 
-## The TinyVerse platform
+## The Tinyverse platform
 
 The Rune platform provides the ability for Machine Learning Engineers/Application package 
 and run TinyML applications (called a `Rune`) in a Virtual Machine on various hardware.
@@ -21,14 +21,14 @@ contains both the model and the code required to process signals to features for
 As such the `Rune` are tiny and only contain exactly what is needed. 
 You can easily share your `Rune` for development, testing and deployments.
 
-TinyVerse provides tooling to manage the lifecycle of your Runes:
+Tinyverse provides tooling to manage the lifecycle of your Runes:
 
 * `rune-cli` to build and run your `Rune`
 * `rune-vm` a virtual machine spec implemented in a variety C++/Rust/JS & Flutter
 * `hammrd` a daemon service to help *privately*  collect labelled data for your projects
 
 
-## TinyVerse architecture and components
+## Tinyverse architecture and components
 
 Rune and Hammer use a client-server architecture. The `rune-vm` runs on your target 
 device and executes and manages the `rune`. Additionally, using the `hammerd` daemon
@@ -38,7 +38,7 @@ The `rune-vm` and `hammrd` daemon *can* run on the same system, or you can conne
 
 Runes can be directly embedded into your hardware or updated by the `hammerd`. 
 
-![TinyVerse Components](/img/docs/architecture.svg)
+![Tinyverse Components](/img/docs/architecture.svg)
 
 
 #### Rune Images

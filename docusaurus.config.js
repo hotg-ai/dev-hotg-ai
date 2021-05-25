@@ -21,9 +21,9 @@ module.exports = {
       disableSwitch: true
     },
     navbar: {
-      title: 'TinyVerse',
+      title: 'Tinyverse',
       logo: {
-        alt: 'TinyVerse',
+        alt: 'Tinyverse',
         src: 'img/logo.svg',
       },
       items: [
@@ -38,7 +38,7 @@ module.exports = {
         //   label: 'RuneVM',
         //   position: 'left',
         // },
-        {href: 'https://tinyverse.substack.com', label: 'Blog', position: 'left'},
+        {href: 'https://Tinyverse.substack.com', label: 'Blog', position: 'left'},
         {href: 'https://hotg.ai', label: 'hotg.ai', position: 'right'},
         {
           href: 'https://github.com/hotg-ai/rune',
@@ -81,7 +81,7 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              href: 'https://tinyverse.substack.com',
+              href: 'https://Tinyverse.substack.com',
             },
             {
               label: 'GitHub',

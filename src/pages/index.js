@@ -37,8 +37,8 @@ const features = [
     imageUrl: 'img/orchestrate.svg',
     description: (
       <>
-        We are working on building the orchestration platform for the TinyML universe, we call it <a target="_new" href="https://tinyverse.substack.com/p/hello-tinyverse?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">Tinyverse</a>.
-        <br/>You can read more about our ideas on <a target="_new" href="https://tinyverse.substack.com/p/device-native-orchestration-the-future?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">The Future of Orchestration on the Edge</a> blog.
+        We are working on building the orchestration platform for the TinyML universe, we call it <a target="_new" href="https://Tinyverse.substack.com/p/hello-Tinyverse?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">Tinyverse</a>.
+        <br/>You can read more about our ideas on <a target="_new" href="https://Tinyverse.substack.com/p/device-native-orchestration-the-future?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">The Future of Orchestration on the Edge</a> blog.
         <br/><br/><code>Rune - Build TinyML apps</code>
         <br/><code>Hammer - Deploy production TinyML apps</code>
         <br/><code>Anvil - Target multiple devices</code>
