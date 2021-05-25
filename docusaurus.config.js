@@ -1,6 +1,6 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'HOTG.AI',
+  title: 'Tinyverse',
   tagline: 'Tools to build, deploy and manage TinyML apps',
   url: 'https://hotg.dev',
   baseUrl: '/',

@@ -14,8 +14,8 @@ const features = [
     description: (
       <>
         Rune is a tiny container specifically designed to help you containerize TinyML applications across several platforms and devices. It is like docker but tinier.
-        <br/><br/><code>$ touch ./Runefile</code>
-        <br/><code>$ rune build ./Runefile</code>
+        <br/><br/><code>$ touch ./Runefile.yml</code>
+        <br/><code>$ rune build ./Runefile.yml</code>
         <br/><code>$ rune run my.rune</code>
       </>
     ),
@@ -27,7 +27,7 @@ const features = [
     description: (
       <>
         Reliable and repeatable builds are the hallmark of production grade systems. Hammer lets you deploy and manage your containers across devices and platforms. 
-        <br/><br/><code>$ hmr XXXX?</code>
+        <br/><br/><code>$ rune-serve my.rune</code>
       </>
     ),
   },

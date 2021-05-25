@@ -1,5 +1,8 @@
 module.exports = {
   docs: [
+    { type: 'doc',
+      id: 'get_started'
+    },
     {
       type: 'doc',
       id: 'overview'
@@ -10,25 +13,11 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Reference Docs',
       collapsed: false,
       items: [
-        'getting_started/1',
-        {
-          type: 'category',
-          label: 'Runes & Proc Blocks',
-          items: [
-            'tutorial',
-            'proc_block_1',
-            'proc_block_2',
-            // 'getting-started',
-            // 'create-a-page',
-            // 'create-a-document',
-            // 'create-a-blog-post',
-            // 'markdown-features',
-            // 'thank-you',
-          ],
-        },
+        'reference/runefile_yml',
+        'reference/rune_cli'
       ],
     },
     {
