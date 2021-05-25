@@ -2,3 +2,110 @@
 title: Add a Rune to your app!
 sidebar_label: Hello TinyWorld!
 ---
+
+Just like Docker images package software together with its dependencies, 
+Rune packages ML and application logic into a tiny container. 
+Runes can then easily be deployed onto different edge devices. 
+By providing a common platform for Runes to run, we can target several edge platforms in one go, 
+making it easier for developers to deploy their models on real world devices.
+
+## Flutter & RuneVM
+
+RuneVM is our virtual machine to run Runes on edge devices. 
+
+RuneVM facilitates running Runes on an edge device by providing the lifecycle management of the Runes. We are launching the RuneVM for iOS and Android first and then over time other edge devices as well. So stay tuned!
+
+Running a *Rune* on iOS and Android devices through the new RuneVM for Flutter plugin gives developers a straightforward method to deploy models fast without platform specific code requirements.
+
+** Flutter and Rune, a perfect match **
+
+[Flutter](https://flutter.dev/) is a cross-platform app development framework allowing absolute freedom in creating user experiences regardless of the host platform.  
+
+Rune is an orchestration tool for specifying how data should be processed. The Rune gets compiled to a WebAssembly library which is loaded by a WebAssembly runtime for execution, taking care of the pre- and post-processing steps required to turn inputs into a form that is usable for a machine learning model and interpreting the results. 
+
+Running Runes in Flutter allows for developers to build an ML inference pipeline once and deploy it on any device in a robust and consistent way.
+
+## Hello Rune
+
+To get you started, here's a simple tutorial how to deploy a rune mobile.
+
+First of all, let's create a new Flutter project:
+
+    me@foo> flutter create hello_rune
+
+This will create a new flutter project with a boilerplate template.
+
+Let's check it out:
+
+    me@foo> cd hello_rune
+
+    me@foo> flutter run
+
+Next step is to add the RuneVM plugin to our project in the pubspec.yaml file:
+
+    dependencies:
+
+	flutter:
+
+	   sdk: flutter
+
+	runevm_fl: ^0.1.3
+
+Fetch the plugin:
+
+    me@foo> flutter pub get
+
+Now let's get to business and run a simple sine Rune that receives a number as input and predicts the corresponding sine transformation.
+
+First in your `main.dart` import RuneVM
+
+```main.dart
+import  'package:runevm_fl/runevm_fl.dart'
+```
+
+Load the Rune file into memory from the assets folder
+
+```
+ByteData bytes = await rootBundle.load('assets/sine.rune');
+
+bool loaded = await  RunevmFl.load(bytes.buffer.asUint8List()) ?? false;
+```
+
+The **RunevmFl.load** loads a rune into memory as a list of bytes
+
+Next you can read the rune manifest which tells you the Rune's inputs and outputs.
+
+```
+String manifest = (await RunevmFl.manifest).toString()
+```
+
+The manifest gives the app information about the input and output formats that are required from the Rune, in this case the input is a simple float32 value represented by 4 bytes
+
+These two steps allow us to feed input data to the rune and run it. We execute the rune with 4 input bytes representing the generated random number:
+
+```
+Random rand = Random();
+
+_input = rand.nextDouble() * 2 * pi;
+
+Uint8List inputBytes = Uint8List(4);
+
+..buffer.asByteData().setFloat32(0, _input, Endian.little);
+
+_output = await  RunevmFl.runRune(inputBytes);
+```
+
+That's it, we just ran our first Rune on a mobile device!
+
+You can setup and play with this today
+
+The code for all this is on the open source github: https://github.com/hotg-ai/hello_rune
+
+Follow along the instruction and say hooray for running a TinyML model on your phone!
+
+git repo for this demo/code - https://github.com/hotg-ai/hello_rune
+
+git repo for Rune containers - https://github.com/hotg-ai/rune
+
+git repo for RuneVM - https://github.com/hotg-ai/runevm_fl 
+

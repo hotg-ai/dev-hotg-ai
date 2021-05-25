@@ -1,4 +1,35 @@
 ---
 title: Installation Guide
-sidebar_label: Get Rune
+sidebar_label: Installing Tinyverse Tools
 ---
+
+Rune and the dependant toolchains used to generate bytecode require some dependencies. To make it 
+easier to use you can leverage docker! Our images are available on [docker hub](https://hub.docker.com/repository/docker/tinyverseml).
+
+## Docker (Recommended)
+
+### Rune Cli
+
+You can use `docker run` to use `rune-cli` directly in your local directory. The following shell script will execute `rune-cli` using volumes in your local directory.
+```
+#! sh
+docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune $@%   
+```
+
+Save the shell script in your PATH variable and you are ready to go!
+
+### Rune-Serve
+Similarly the rune-serve tool is also available as a docker container and can be run with the following command:
+
+```
+docker run -e RUST_LOG=INFO -v `pwd`:/app/static tinyverseml/rune-serve
+```
+
+** Note about Apple M1 **
+
+Currently Docker on M1 is still unstable and is not supported! We are working on this actively follow our progress
+on (github)[https://github.com/hotg-ai/rune/issues/174].  
+
+** Note about Windows **
+
+

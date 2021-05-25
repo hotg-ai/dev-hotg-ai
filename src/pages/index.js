@@ -14,8 +14,8 @@ const features = [
     description: (
       <>
         Rune is a tiny container specifically designed to help you containerize TinyML applications across several platforms and devices. It is like docker but tinier.
-        <br/><br/><code>$ touch ./Runefile</code>
-        <br/><code>$ rune build ./Runefile</code>
+        <br/><br/><code>$ touch ./Runefile.yml</code>
+        <br/><code>$ rune build ./Runefile.yml</code>
         <br/><code>$ rune run my.rune</code>
       </>
     ),
@@ -27,7 +27,7 @@ const features = [
     description: (
       <>
         Reliable and repeatable builds are the hallmark of production grade systems. Hammer lets you deploy and manage your containers across devices and platforms. 
-        <br/><br/><code>$ hmr XXXX?</code>
+        <br/><br/><code>$ rune-serve my.rune</code>
       </>
     ),
   },
@@ -37,8 +37,8 @@ const features = [
     imageUrl: 'img/orchestrate.svg',
     description: (
       <>
-        We are working on building the orchestration platform for the TinyML universe, we call it <a target="_new" href="https://tinyverse.substack.com/p/hello-tinyverse?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">Tinyverse</a>.
-        <br/>You can read more about our ideas on <a target="_new" href="https://tinyverse.substack.com/p/device-native-orchestration-the-future?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">The Future of Orchestration on the Edge</a> blog.
+        We are working on building the orchestration platform for the TinyML universe, we call it <a target="_new" href="https://Tinyverse.substack.com/p/hello-Tinyverse?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">Tinyverse</a>.
+        <br/>You can read more about our ideas on <a target="_new" href="https://Tinyverse.substack.com/p/device-native-orchestration-the-future?utm_campaign=post&utm_medium=web&utm_source=hotg-dev">The Future of Orchestration on the Edge</a> blog.
         <br/><br/><code>Rune - Build TinyML apps</code>
         <br/><code>Hammer - Deploy production TinyML apps</code>
         <br/><code>Anvil - Target multiple devices</code>
