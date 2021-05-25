@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <Layout
       title={`TinyML tools from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Making every edge smarter">
       <header className={clsx('hero hero--dark', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
