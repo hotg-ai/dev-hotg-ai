@@ -45,6 +45,16 @@ module.exports = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          href: 'https://tinyverse.discourse.group',
+          label: 'Forums',
+          position: 'left'
+        },
+        {
+          href: 'https://discord.gg/gPCNNvRnF4',
+          label: 'Chat With Us',
+          position: 'left'
+        }
       ],
     },
     footer: {
