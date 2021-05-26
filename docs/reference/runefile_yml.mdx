@@ -195,7 +195,7 @@ pipeline:
 
 Capabilities have the following properties:
 
-- [`args`](#args)
+- [`args`](#arguments)
 - [`outputs`](#outputs)
 
 Capabilities are specified using a `capability` key which dictates what type
@@ -209,6 +209,131 @@ Supported capability types are:
 | RAW   | raw data from a user-specified source                            |                                                                                                                                                                                                                                                                                    |
 | SOUND | 16-bit Pulse Code Modulated audio samples                        | <ul><li>`hz` - the sample rate in Hertz</li></ul>                                                                                                                                                                                                                                  |
 | IMAGE | An image                                                         | <ul><li>`width` - the image's width in pixels</li><li>`height` - the image's height in pixels</li><li>`pixel-format` - the format used by the pixels. For convenience the constants `@PixelFormat::Grayscale`, `@PixelFormat::RGB`, and `@PixelFormat::BGR` may be used.</li></ul> |
+| ACCEL | Accelerometer samples                                            |                                                                                                                                                                                                                                                                                    |
+
+### Models
+
+A model stage is specified by giving it a `model: ./path/to/model.tflite`
+property which points to the location of a TensorFlow Lite model on disk,
+relative to the Runefile.
+
+```yaml
+pipeline:
+  sine:
+    model: "./sinemodel.tflite"
+    inputs:
+      - random
+    outputs:
+      - type: F32
+        dimensions: [1]
+```
+
+Models have the following properties:
+
+- [`inputs`](#inputs)
+- [`outputs`](#outputs)
+
+### Procedural Blocks
+
+A procedural block (aka "proc block") is a Rust crate which exposes
+functionality for transforming data from one form to another. Proc block stages
+are differentiated using a `proc-block: hotg-ai/rune#proc_blocks/label`
+property.
+
+The proc block identifier takes on the form, `path@version#sub_path`, where
+`path` is the only required piece.
+
+The `path` piece may be interpreted slightly differently depending on its form:
+
+- A single identifier (e.g. `rune-label-proc-block`) is interpreted as a crate
+  on [crates.io][crates-io]
+- A `path` beginning with `./` points to a crate on disk relative to the
+  Runefile
+- A full URL is interpreted as the path to a git repository on the internet
+  and will be used as [a git dependency][git-dependencies]
+- A path of the form `hotg-ai/rune` is shorthand for a GitHub repository
+
+More formally, a proc block path matches the following regex:
+
+```
+(?x)
+(?P<base>[\w\d:/_.-]+)
+(?:@(?P<version>[\w\d./-]+))?
+(?:\#(?P<sub_path>[\w\d._/-]+))?
+```
+
+Common properties supported by proc blocks are:
+
+- [`args`](#arguments)
+- [`inputs`](#inputs)
+- [`outputs`](#outputs)
+
+Some well-known proc blocks are:
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Inputs/Outputs</th>
+            <th>Arguments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Modulo</td>
+            <td>Calculates the modulus of each element in a tensor</td>
+            <td>(any)</td>
+            <td>
+                <ul>
+                    <li><code>modulus</code> - the modulus to use</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+### Outputs
+
+An output is the mechanism used to pass information processed by the Rune to the
+outside world (e.g. the host application). Outputs are differentiated using a
+`output: serial` property, where the value specifies the type of output.
+
+```yaml
+pipeline:
+  serial:
+    out: serial
+    inputs:
+      - rand
+```
+
+Common properties supported by outputs are:
+
+- [`args`](#arguments)
+- [`inputs`](#inputs)
+
+Some well-known outputs are:
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Inputs</th>
+            <th>Arguments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>SERIAL</td>
+            <td>A user-defined component which accepts JSON-formatted UTF-8 strings</td>
+            <td>(any)</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
 
 [row-major]: https://en.wikipedia.org/wiki/Row-_and_column-major_order
+[crates-io]: https://crates.io/
+[git-dependencies]: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-git-repositories
