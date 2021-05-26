@@ -22,7 +22,7 @@ module.exports = {
       collapsed: false,
       items: [
         'reference/runefile_yml',
-        'reference/rune_cli'
+       // 'reference/rune_cli'
       ],
     },
     {
