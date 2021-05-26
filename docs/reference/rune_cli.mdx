@@ -270,7 +270,69 @@ The capabilities supported by the `rune` CLI are:
     </tbody>
 </table>
 
-# Rune Serve
+# Version (`rune version`)
+
+The `rune version` sub-command prints out the `rune` binary's version number.
+
+```console
+$ rune version --help
+Print detailed version information
+
+USAGE:
+    rune version [FLAGS] [OPTIONS]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+    -v, --verbose
+
+OPTIONS:
+    -f, --format <format>     [default: text]
+```
+
+By default, it will just print the version number, build date, and the git
+commit it was compiled from.
+
+```console
+$ rune version
+rune 0.2.1 (8fbe8a5 2021-05-21)
+```
+
+For more detailed information including when the `rune` binary was compiled and
+which version of the Rust compiler it was compiled with, use the `--verbose`
+flag. By default, this information will be printed in a human-readable form
+(i.e. equivalent to `--format text`).
+
+```console
+$ rune version --verbose
+rune 0.2.1 (8fbe8a5 2021-05-21)
+binary: rune
+rune-version: 0.2.1
+commit-hash: 8fbe8a518875312dd7e39a092d0b4d7482fbaee8
+commit-date: 2021-05-21T18:32:12+00:00
+host: x86_64-unknown-linux-gnu
+rustc-version: 1.54.0-nightly
+rustc-commit-hash: 881c1ac408d93bb7adaa3a51dabab9266e82eee8
+rustc-commit-date: 2021-05-08
+```
+
+The `--format json` argument can be used to ask for output in a machine-readable
+form.
+
+```console
+$ rune version --verbose --format json
+{
+  "executable": "rune",
+  "rune-version": "0.2.1",
+  "commit-short-hash": "8fbe8a5",
+  "commit-hash": "8fbe8a518875312dd7e39a092d0b4d7482fbaee8",
+  "commit-timestamp": "2021-05-21T18:32:12Z",
+  "host": "x86_64-unknown-linux-gnu",
+  "rustc-version": "1.54.0-nightly",
+  "rustc-commit-hash": "881c1ac408d93bb7adaa3a51dabab9266e82eee8",
+  "rustc-commit-date": "2021-05-08"
+}
+```
 
 [data-type]: https://github.com/tensorflow/tensorflow/blob/acf39b7d5f03568d35fa57b856bcf8593c147612/tensorflow/lite/c/c_api_types.h#L62-L81
 [cap]: runefile_yml.mdx#capabilities
