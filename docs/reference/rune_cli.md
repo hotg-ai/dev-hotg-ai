@@ -1,7 +1,7 @@
 ---
 title: Rune Command Line Reference
 sidebar_label: Rune Command Line
-slug: /reference/runecli
+slug: /reference/rune_cli
 ---
 
 The `rune` CLI tool is the primary way most people will develop Runes.
@@ -84,10 +84,11 @@ $ rune model-info microspeech.tflite --format json
 ```
 
 In either case, the `inputs` and `outputs` properties specify the tensor
-dimensions and element types used as input/output. The `element_kind` property
-is specified in the [` tensorflow/tensorflow/lite/c/c_api_types.h `][data-type]
-header file, with types named similarly to that used in [the `outputs` section](./runefile_yml.mdx#outputs)
-of a Runefile.
+dimensions and element types used as input/output. The possible values for
+`element_kind` correspond to the `TfLiteType` enum variants in [`
+tensorflow/tensorflow/lite/c/c_api_types.h `][data-type] header file, and are
+named similarly to that used in [the `outputs`
+section](./runefile_yml.md#outputs) of a Runefile.
 
 # Build (`rune build`)
 
@@ -335,4 +336,4 @@ $ rune version --verbose --format json
 ```
 
 [data-type]: https://github.com/tensorflow/tensorflow/blob/acf39b7d5f03568d35fa57b856bcf8593c147612/tensorflow/lite/c/c_api_types.h#L62-L81
-[cap]: runefile_yml.mdx#capabilities
+[cap]: runefile_yml.md#capabilities
