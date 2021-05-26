@@ -119,6 +119,11 @@ pipeline:
         - right
 ```
 
+For more advanced use cases like using a well-known enum or calculated
+expressions, a "verbatim" argument value may be used. This is a string
+containing valid Rust syntax, prefixed with an `@` symbol (e.g.
+`@PixelFormat::Grayscale` or `@244*244*3`).
+
 #### Inputs
 
 The `inputs` property contains a list of strings specifying which stages a
@@ -203,13 +208,60 @@ of capability it is.
 
 Supported capability types are:
 
-| Name  | Description                                                      | Supported Arguments                                                                                                                                                                                                                                                                |
-| ----- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RAND  | random data generated from the runtime's random number generator |                                                                                                                                                                                                                                                                                    |
-| RAW   | raw data from a user-specified source                            |                                                                                                                                                                                                                                                                                    |
-| SOUND | 16-bit Pulse Code Modulated audio samples                        | <ul><li>`hz` - the sample rate in Hertz</li></ul>                                                                                                                                                                                                                                  |
-| IMAGE | An image                                                         | <ul><li>`width` - the image's width in pixels</li><li>`height` - the image's height in pixels</li><li>`pixel-format` - the format used by the pixels. For convenience the constants `@PixelFormat::Grayscale`, `@PixelFormat::RGB`, and `@PixelFormat::BGR` may be used.</li></ul> |
-| ACCEL | Accelerometer samples                                            |                                                                                                                                                                                                                                                                                    |
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Supported Arguments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ACCEL</code></td>
+            <td>Samples from an accelerometer as 3 `f32`s, X, Y, and Z.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><code>RAND</code></td>
+            <td>random data generated from the runtime's random number generator</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><code>RAW</code></td>
+            <td>raw data from an opaque user-specified source</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><code>SOUND</code></td>
+            <td>16-bit Pulse Code Modulated audio samples</td>
+            <td>
+                <ul>
+                    <li><code>hz</code> - the sample rate in Hertz</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>IMAGE</code></td>
+            <td>An image</td>
+            <td>
+                <ul>
+                    <li><code>width</code> - the image's width in pixels</li>
+                    <li><code>height</code> - the image's height in pixels</li>
+                    <li>
+                        <code>pixel-format</code> - the format used by the
+                        pixels.  Possible values are:
+                        <ul>
+                            <li><code>@PixelFormat::Grayscale</code></li>
+                            <li><code>@PixelFormat::RGB</code></li>
+                            <li><code>@PixelFormat::BGR</code></li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 ### Models
 
