@@ -1,6 +1,7 @@
 module.exports = {
   docs: [
-    { type: 'doc',
+    {
+      type: 'doc',
       id: 'get_started'
     },
     {
@@ -11,7 +12,7 @@ module.exports = {
       type: 'doc',
       id: 'overview'
     },
-    
+
     {
       type: 'doc',
       id: 'get_rune'
@@ -22,7 +23,7 @@ module.exports = {
       collapsed: false,
       items: [
         'reference/runefile_yml',
-       // 'reference/rune_cli'
+        'reference/rune_cli'
       ],
     },
     {
