@@ -377,6 +377,46 @@ $ rune inspect examples/debugging/debugging.rune --format json
 
 # Graph (`rune graph`)
 
+The `rune graph` subcommand can be used to visually explore a Rune pipeline.
+When directed at a Runefile or compiled Rune, this will generate a file that
+[graphviz][gv] can turn into a flow chart.
+
+```console
+$ rune graph -h
+Visualise a Rune's pipeline graph
+
+USAGE:
+    rune graph [OPTIONS] <input>
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -o, --output <output>    Where to write the generated file (stdout by default)
+
+ARGS:
+    <input>    The Rune or Runefile to graph
+```
+
+The output from running `rune graph` on [a Runefile][debug-runefile]
+will typically be passed directly to the `dot` command.
+
+```console
+$ rune graph examples/debugging/Runefile.yml | dot -Tpng > debugging.png
+```
+
+![The Debugging Rune](debugging.png)
+
+## Input (`<input>`)
+
+The Rune or Runefile to analyse and graph.
+
+## Output File (`--output`)
+
+The `--output` argument specifies where the generated DOT file will be written
+to. If this argument isn't provided it will be printed to STDOUT.
+
 # Version (`rune version`)
 
 The `rune version` sub-command prints out the `rune` binary's version number.
@@ -443,3 +483,5 @@ $ rune version --verbose --format json
 
 [data-type]: https://github.com/tensorflow/tensorflow/blob/acf39b7d5f03568d35fa57b856bcf8593c147612/tensorflow/lite/c/c_api_types.h#L62-L81
 [cap]: runefile_yml.md#capabilities
+[gv]: https://graphviz.org/
+[debug-runefile]: https://github.com/hotg-ai/rune/blob/0e5c7076baa5c4075db94a778020ad47bbbe8672/examples/debugging/Runefile.yml
