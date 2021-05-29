@@ -1,7 +1,7 @@
 ---
 title: Runefile Reference
 sidebar_label: Runefile Reference
-slug: /reference/runefile_yaml
+slug: /reference/runefile_yml
 ---
 
 The primary way to create a Rune is by using a text file in the YAML format,
