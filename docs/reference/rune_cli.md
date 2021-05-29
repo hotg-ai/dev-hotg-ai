@@ -271,6 +271,152 @@ The capabilities supported by the `rune` CLI are:
     </tbody>
 </table>
 
+# Inspect (`rune inspect`)
+
+Each Rune will be embedded a serialised version of the original Runefile and
+version of the `rune` CLI it was compiled from.
+
+This metadata can be retrieved later on using the `rune inspect` subcommand
+although tools like `wasm-strip` may remove it to reduce the Rune's size.
+
+```console
+$ rune inspect -h
+Inspect a Rune
+
+USAGE:
+    rune inspect [OPTIONS] <rune>
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -f, --format <format>    The format to use when printing output [default: text]  [possible values: json, text]
+
+ARGS:
+    <rune>    The Rune to inspect
+```
+
+## Rune (`<rune>`)
+
+The compiled Rune to inspect.
+
+## Format (`--format`)
+
+By default, the model's inputs and outputs will be presented in a human-readable
+format. This is the equivalent of using the `--format text` option.
+
+```console
+$ rune inspect examples/debugging/debugging.rune
+Compiled by: rune v0.2.1 (ebb8057 2021-05-29)
+Capabilities:
+  rand (Random)
+    Outputs:
+    - f32[1]
+```
+
+The `--format json` flag can be provided to get a more machine-friendly version.
+
+```console
+$ rune inspect examples/debugging/debugging.rune --format json
+{
+  "rune_cli_build_info": {
+    "timestamp": "2021-05-29T08:16:05.317354345Z",
+    "profile": "debug",
+    "optimization_level": 0,
+    "crate_info": {
+      "name": "rune",
+      "version": "0.2.1",
+      "authors": [
+        "Kartik Thakore <kartik@thakore.ai>",
+        "Akshay Sharma <akshay@sharma.ai>",
+        "Michael-F-Bryan <michael@hotg.ai>"
+      ],
+      "license": "Apache 2.0",
+      "enabled_features": [],
+      "available_features": [],
+      "dependencies": []
+    },
+    "compiler": {
+      "version": "1.54.0-nightly",
+      "commit_id": "881c1ac408d93bb7adaa3a51dabab9266e82eee8",
+      "commit_date": "2021-05-08",
+      "channel": "Nightly",
+      "host_triple": "x86_64-unknown-linux-gnu",
+      "target_triple": "x86_64-unknown-linux-gnu"
+    },
+    "version_control": {
+      "Git": {
+        "commit_id": "0e5c7076baa5c4075db94a778020ad47bbbe8672",
+        "commit_short_id": "0e5c7076ba",
+        "commit_timestamp": "2021-05-29T08:13:36Z",
+        "dirty": false,
+        "branch": "master",
+        "tags": []
+      }
+    }
+  },
+  "simplified_rune": {
+    "capabilities": {
+      "rand": {
+        "capability_type": "Random",
+        "outputs": [
+          {
+            "type": "f32",
+            "dimensions": [
+              1
+            ]
+          }
+        ],
+        "parameters": {}
+      }
+    }
+  }
+}
+```
+
+# Graph (`rune graph`)
+
+The `rune graph` subcommand can be used to visually explore a Rune pipeline.
+When directed at a Runefile or compiled Rune, this will generate a file that
+[graphviz][gv] can turn into a flow chart.
+
+```console
+$ rune graph -h
+Visualise a Rune's pipeline graph
+
+USAGE:
+    rune graph [OPTIONS] <input>
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -o, --output <output>    Where to write the generated file (stdout by default)
+
+ARGS:
+    <input>    The Rune or Runefile to graph
+```
+
+The output from running `rune graph` on [a Runefile][debug-runefile]
+will typically be passed directly to the `dot` command.
+
+```console
+$ rune graph examples/debugging/Runefile.yml | dot -Tpng > debugging.png
+```
+
+![The Debugging Rune](debugging.png)
+
+## Input (`<input>`)
+
+The Rune or Runefile to analyse and graph.
+
+## Output File (`--output`)
+
+The `--output` argument specifies where the generated DOT file will be written
+to. If this argument isn't provided it will be printed to STDOUT.
+
 # Version (`rune version`)
 
 The `rune version` sub-command prints out the `rune` binary's version number.
@@ -337,3 +483,5 @@ $ rune version --verbose --format json
 
 [data-type]: https://github.com/tensorflow/tensorflow/blob/acf39b7d5f03568d35fa57b856bcf8593c147612/tensorflow/lite/c/c_api_types.h#L62-L81
 [cap]: runefile_yml.md#capabilities
+[gv]: https://graphviz.org/
+[debug-runefile]: https://github.com/hotg-ai/rune/blob/0e5c7076baa5c4075db94a778020ad47bbbe8672/examples/debugging/Runefile.yml
