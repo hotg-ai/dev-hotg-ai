@@ -6,7 +6,7 @@ slug: /reference/rune_cli
 
 The `rune` CLI tool is the primary way most people will develop Runes.
 
-# Model Info (`rune model-info`)
+## Model Info (`rune model-info`)
 
 The first step when integrating a TensorFlow Lite model into a Rune is to figure
 out what data it receives as input and what it generates as output.
@@ -33,12 +33,12 @@ ARGS:
     <file>    The TensorFlow Lite model to inspect
 ```
 
-## The Model (`<file>`)
+### The Model (`<file>`)
 
 The mode file is a required positional argument pointing to a valid TensorFlow
 Lite file.
 
-## Output Format (`--format`)
+### Output Format (`--format`)
 
 By default, the model's inputs and outputs will be presented in a human-readable
 format. This is the equivalent of using the `--format text` option.
@@ -90,7 +90,7 @@ tensorflow/tensorflow/lite/c/c_api_types.h `][data-type] header file, and are
 named similarly to that used in [the `outputs`
 section](./runefile_yml.md#outputs) of a Runefile.
 
-# Build (`rune build`)
+## Build (`rune build`)
 
 The `rune build` sub-command will parse a Runefile and generate an equivalent
 project in Rust so it can be compiled to WebAssembly.
@@ -118,12 +118,12 @@ ARGS:
     <runefile>    The Runefile to compile [default: Runefile.yml]
 ```
 
-## The Runefile (`<runefile>`)
+### The Runefile (`<runefile>`)
 
 The name of the runefile being compiled. This is the only positional argument
 and will default to `Runefile.yml` in the current directory.
 
-## The Cache Directory (`--cache-dir`)
+### The Cache Directory (`--cache-dir`)
 
 The `--cache-dir` argument is used to specify a temporary directory that the
 Rune project will be written to and compiled in. If not specified then
@@ -137,25 +137,25 @@ the operating system's native cache directory.
 | macOS    | `$HOME`/Library/Caches              | `/Users/Alice/Library/Caches/runes/sine`  |
 | Windows  | `{FOLDERID_LocalAppData}`           | `C:\Users\Alice\AppData\Local\runes\sine` |
 
-## The Current Directory (`--current-directory`)
+### The Current Directory (`--current-directory`)
 
 The `--current-directory` argument specifies which directory to use when
 resolving relative paths in a Runefile. By default it will be the directory the
 Runefile is located in.
 
-## Name (`--name`)
+### Name (`--name`)
 
 Each Rune can be given a name which alters things like the name of the generated
 Rust project and the label attached to any log messages emitted by the Rune. By
 default, the name of the Runefile's directory will be used.
 
-## Output File (`--output`)
+### Output File (`--output`)
 
 The `--output` argument specifies where the generated Rune will be saved to. By
 default it will be the [`name`](#name) with the `.rune` extension (e.g.
 `microspeech.rune`).
 
-## Debug Mode (`--debug`)
+### Debug Mode (`--debug`)
 
 A Rune can be compiled with debug assertions enabled and without optimisations
 using the `--debug` flag.
@@ -169,7 +169,7 @@ Compiling a Rune in debug mode will often be faster than release mode (the
 default), however Runes dealing with larger amounts of data may become
 unacceptably slow to execute.
 
-# Run (`rune run`)
+## Run (`rune run`)
 
 The `rune run` sub-command takes a compiled Rune and runs it. This
 specified capabilities as inputs.
@@ -198,11 +198,11 @@ ARGS:
     <rune>    The Rune to run
 ```
 
-## The Rune (`<rune>`)
+### The Rune (`<rune>`)
 
 The Rune file is a required argument pointing to a valid Rune on disk.
 
-## Capabilities (`--capability`)
+### Capabilities (`--capability`)
 
 By design, the only way to pass information into a Rune is via [a
 *Capability*][cap].  The syntax for specifying a capability is `--capability
@@ -271,7 +271,7 @@ The capabilities supported by the `rune` CLI are:
     </tbody>
 </table>
 
-# Inspect (`rune inspect`)
+## Inspect (`rune inspect`)
 
 Each Rune will be embedded a serialised version of the original Runefile and
 version of the `rune` CLI it was compiled from.
@@ -297,11 +297,11 @@ ARGS:
     <rune>    The Rune to inspect
 ```
 
-## Rune (`<rune>`)
+### Rune (`<rune>`)
 
 The compiled Rune to inspect.
 
-## Format (`--format`)
+### Format (`--format`)
 
 By default, the model's inputs and outputs will be presented in a human-readable
 format. This is the equivalent of using the `--format text` option.
@@ -375,7 +375,7 @@ $ rune inspect examples/debugging/debugging.rune --format json
 }
 ```
 
-# Graph (`rune graph`)
+## Graph (`rune graph`)
 
 The `rune graph` subcommand can be used to visually explore a Rune pipeline.
 When directed at a Runefile or compiled Rune, this will generate a file that
@@ -408,16 +408,16 @@ $ rune graph examples/debugging/Runefile.yml | dot -Tpng > debugging.png
 
 ![The Debugging Rune](debugging.png)
 
-## Input (`<input>`)
+### Input (`<input>`)
 
 The Rune or Runefile to analyse and graph.
 
-## Output File (`--output`)
+### Output File (`--output`)
 
 The `--output` argument specifies where the generated DOT file will be written
 to. If this argument isn't provided it will be printed to STDOUT.
 
-# Version (`rune version`)
+## Version (`rune version`)
 
 The `rune version` sub-command prints out the `rune` binary's version number.
 
