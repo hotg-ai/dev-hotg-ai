@@ -54,7 +54,12 @@ module.exports = {
           href: 'https://discord.gg/gPCNNvRnF4',
           label: 'Chat With Us',
           position: 'left'
-        }
+        },
+        {
+          to: 'careers',
+          label: 'Careers',
+          position: 'left',
+        },
       ],
     },
     footer: {
