@@ -89,6 +89,10 @@ module.exports = {
               label: 'Twitter',
               href: 'https://twitter.com/hotg_ai',
             },
+            {
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/company/hotg-ai',
+            }
           ],
         },
         {
