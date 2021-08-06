@@ -185,103 +185,139 @@ Visit [Runefile reference](/docs/reference/runefile_yml) to learn how to write.
 
 ## Let's take it for a spin
 
-Ok, so far we have assembled the food.tflite model and have authored the initial version of Runefile.yaml. Let us now compile and test what we have so far.
+Ok, so far we have assembled the `food.tflite` model and have written the initial
+`Runefile.yaml`. Let's now compile and test what we have so far.
 
-### Build the rune
+### Build the Rune
 
 Follow the docker based command to run the rune. We are calling the rune cli from within docker, and mapping our current directory in docker (‘nix `pwd`) to the virtual mount in docker. This allows docker to access the current directory containing the Runefile.yaml and helps write the .rune file.
 
 ```shell
-# in the food directory, call rune via docker (‘nix OS):
-$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune build Runefile.yaml
-
-# you should see something like:
-[xxx DEBUG rune::build] Parsing "Runefile.yaml"
-[xxx DEBUG rune::build] Compiling food in "/root/.cache/runes/food"
-...
-
-Read 21198601 bytes from "/root/.cache/runes/food/target/wasm32-unknown-unknown/release/food.wasm"
-Generated 21198601 bytes
+$ rune build Runefile.yaml
+[2021-08-06T08:31:26.469Z INFO  hotg_rune_codegen::environment] Generating the project in "/home/user/.cache/runes/food"
+   Compiling food v0.0.0 (/home/user/.cache/runes/food)
+    Finished release [optimized] target(s) in 1.57s
+[2021-08-06T08:31:28.382Z INFO  hotg_rune_cli::build] The Rune was written to "/home/user/food/food.rune"
 
 # Check the directory now
-$ ls
-Runefile.yaml food.rune food.tflite
+$  ls
+Runefile.yml  food.rune  food.tflite
 ```
 
-You should see a food.rune file that is created from this file. The name food was chosen based on the parent directory which is called food. You can pass the --output argument to the rune command to generate the filename of your choice.
+You should see a `food.rune` file that is created from this file. You can name
+the Rune whatever you want using the `--name` argument, but it defaults to the
+name of the Runefile's directory.
+
+We can use the `rune` tool to learn more about a compiled Rune. This is useful
+for knowing what capabilities (inputs provided by the host) will need to be
+available when running the Rune.
+
+```shell
+$ rune inspect food.rune
+Compiled by: hotg-rune-cli v0.4.1-dev (7396914 2021-08-06)
+Capabilities:
+  image (Image)
+    Outputs:
+    - u8[1, 192, 192, 3]
+    Parameters:
+    - pixel_format: String("@PixelFormat::RGB")
+    - width: Int(192)
+    - height: Int(192)
+```
 
 ### Run the rune
 
-Running the rune on the terminal is an easy way to check if the rune is working correctly.
-In order to run the rune we need a sample image of food. [Download this image of food](https://raw.githubusercontent.com/hotg-ai/test-runes/master/image/food/assets/original_ramen.jpeg) and place it in the same directory where the model, runefile and .rune are located. Lets call it ramen.jpg
+Running the Rune on the terminal is an easy way to check if it is working
+correctly.
 
-We are going to run the food.rune file and ask it to predict what is in the ramen.jpg image.
+First let's download an image of some food.
 
 ```shell
-# Run the docker to call rune run command
-$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
-
-# you should see an output like this
-
-[xxx INFO  runicos_base::image] Serial: {"type_name":"u8","channel":2,"elements":[0,0,0,0,0,0,0,0...0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"dimensions":[2024]}
+$ curl -o ramen.jpeg https://raw.githubusercontent.com/hotg-ai/test-runes/master/image/food/assets/original_ramen.jpeg
 ```
 
-In fact there are many more zeros in the elements, I have trimmed it here for display.
+![Ramen][ramen]
+
+```shell
+$ rune run food.rune --image ramen.jpeg
+[2021-08-06T08:45:42.135Z INFO  hotg_rune_cli::run::command] Running rune: food.rune
+[2021-08-06T08:45:42.384Z INFO  hotg_rune_runtime::common_outputs] Serial: {"type_name":"u8","channel":2,"elements":[0,0,0,0,0,0,...],"dimensions":[1,2024]}
+```
+
+In fact there are many more zeros in the elements (2024 of them!), but we've trimmed it here for display.
 
 You should notice a few things:
-* We called rune run on food.rune and passed it the capability image pointing to the location of the image (current directory). Runefile had declared that we needed a capability image remember!
-* The output is the raw model output from TF lite model with the dimensions 2024 and it is not very useful right now.
+- We called `rune run` on `food.rune` and passed it the image we want to
+  identify
+- The output is the raw model output from TF lite model with the dimensions 2024
+  and it is not very useful right now.
 
-However, we have proved here that the rune worked, but we cannot say if it was right. So lets fix this.
+As an aside, if you forgot the `--image ramen.jpeg` you may have been greeted
+with an error like this:
 
+```shell
+$ rune run food.rune
+[2021-08-06T08:47:32.167Z INFO  hotg_rune_cli::run::command] Running rune: food.rune
+Error: Unable to initialize the virtual machine
 
-## Adding processing blocks to runes
+Caused by:
+    0: Unable to call the _manifest function
+    1: RuntimeError: Unable to create the "IMAGE" capability
+           at <unnamed> (<module>[22]:0x1353)
+    2: Unable to create the "IMAGE" capability
+    3: No sources were provided for this capability type (hotg_rune_cli::run::image::Image)
+```
 
-To make sense of the model output we need to process it and make it more human readable.
+This says we weren't able to initialize the Rune runtime because no sources
+were provided for the `"IMAGE"` capability.
 
-First, lets add labels to the output. The model output is a probability vector of dimension 2024, corresponding to a background class and one of 2023 food dishes in the labelmap. This is described in the TF Hub page for the [food models in the output section](https://tfhub.dev/google/aiy/vision/classifier/food_V1/1).
+Anyway, our initial smoke test passes so let's do something to clean up this
+output.
 
-So to see all the labels download the CSV file linked on that page: [https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv](https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv). There are 2024 items in that list.
+## Adding Processing Blocks to Runes
 
-We can supply this list in the Runefile as a block to process after the model block output. See the code below
+To make sense of the model output we need to process it and make it more human
+readable.
 
+Looking back at the description on [our food model's TensorFlow Hub page][food],
+we can see that the model output is a probability vector of dimension 2024,
+corresponding to a background class and one of 2023 food dishes in the label
+map.
 
-#### **Note**: We have trimmed the list for display here. The full list and the full yaml file can be found here:
-https://github.com/hotg-ai/test-runes/blob/master/image/food/Runefile.yml
+The page also has a link to [download the label map][food-labels] as a CSV.
 
+We can use this list in the Runefile as a the arguments to a *"label"*
+processing block.
+
+(**Note**: We have trimmed the list for display here)
 
 ```yaml
----
+version: 1
 image: runicos/base
 pipeline:
  image:
    capability: IMAGE
    outputs:
-     - type: U8
-       dimensions:
-         - 192
-         - 192
-         - 3
+     - type: u8
+       dimensions: [1, 192, 192, 3]
    args:
      width: 192
      height: 192
      pixel_format: "@PixelFormat::RGB"
- food:
+ classify:
    model: "./food.tflite"
    inputs:
      - image
    outputs:
-     - type: U8
-       dimensions:
-         - 2024
+     - type: u8
+       dimensions: [1, 2024]
  label:
    proc-block: "hotg-ai/rune#proc_blocks/label"
    inputs:
-     - food
+     - classify
    outputs:
      - type: UTF8
-       dimensions:
-         - 3
+       dimensions: [3]
    args:
      labels:
        - __background__
@@ -297,63 +333,75 @@ pipeline:
      - label
 ```
 
-Notice the following change in the yaml file now:
-1. We have a block called label which is a processing block. Rune ships with several out of the box processing blocks such as label proc block that maps the output of a model to the right label. You can author your own proc block too! (how to will be explained in reference)
-2. The input to the serial block is no longer the model food, but the label block. We have changed the pipeline to go from: input image to model output to label proc block to serial.
+Notice the following change in the YAML file now:
+
+1. We have a block called `label` which is a processing block. Rune ships with
+   several out of the box processing blocks such as `label` proc block that maps
+   the output of a model to the right label. You can author your own proc block
+   too!
+2. The input to the serial block is no longer the model, but the label block.
 
 Let's compile and give this a try.
 
 ```shell
-# Build the new Runefile.yaml
-docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune build Runefile.yaml
-...
+$ rune build Runefile.yml
 
-# Run the docker to call rune run command
-$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
-
-# you should see an output like this
+$ rune run food.rune --image ramen.jpeg
 
 [xxx INFO  runicos_base::image] Serial: {"type_name":"u8","channel":2,"elements":["__background__","__background__","__background__”....,"__background__"],"dimensions":[2024]}
 ```
 
-Ok it worked but now it has 2024 elements output and most of them are ,"__background__" - which is useless for us to check easily.
+Ok it worked but now it has 2024 elements output and most of them are
+,"__background__" - which is useless for us to check easily.
 
-Lets add another processing block - the one that only selects a few top predictions. Again, rune ships with out of the box most_confident proc block can help select just the right ones before applying the label.
-Here is the updated yaml file.
+Lets add another processing block - this time we'll use one that only selects a
+few top predictions. Fortunately, the Rune repo already contains a
+`most_confident` proc bloc we can use.
 
 
 ```yaml
----
+version: 1
 image: runicos/base
 pipeline:
  image:
    capability: IMAGE
    outputs:
-     - type: U8
-       dimensions:
-         - 192
-         - 192
-         - 3
+     - type: u8
+       dimensions: [1, 192, 192, 3]
    args:
      width: 192
      height: 192
      pixel_format: "@PixelFormat::RGB"
- food:
+ classify:
    model: "./food.tflite"
    inputs:
      - image
    outputs:
-     - type: U8
-       dimensions:
-         - 2024
+     - type: u8
+       dimensions: [1, 2024]
+ label:
+   proc-block: "hotg-ai/rune#proc_blocks/label"
+   inputs:
+     - classify
+   outputs:
+     - type: UTF8
+       dimensions: [3]
+   args:
+     labels:
+       - __background__
+       - Chaudin
+       - Bambalouni
+       - Ghoriba
+       - Mango_sticky_rice
+       ...
+       - Kondowole
  most_confident:
    proc-block: "hotg-ai/rune#proc_blocks/most_confident_indices"
    inputs:
-     - food
+     - classify
    outputs:
      - type: U32
-       dimensions:
-         - 3
+       dimensions: [3]
    args:
      count: 3
  label:
@@ -362,8 +410,7 @@ pipeline:
      - most_confident
    outputs:
      - type: UTF8
-       dimensions:
-         - 3
+       dimensions: [3]
    args:
      labels:
        - __background__
@@ -379,30 +426,38 @@ pipeline:
      - label
 ```
 
-
 You should notice the following changes:
-1. We have added a block called most_confident that is before the label block. This proc block sorts the highest probability items and we are selecting the top 3 (count). All of this is configurable in the Runefile! You can read all the supported proc blocks in the rune repository here.
-2. The input to the label block is now the most_confident block. The rest of the pipeline stays the same.
+1. We have added a block called `most_confident` that is before the `label`
+   block. This proc block sorts the highest probability items and we are
+   selecting the top 3 (count). All of this is configurable in the Runefile!
+   You can read all the supported proc blocks in the rune repository here.
+2. The input to the label block is now the most_confident block. The rest of the
+   pipeline stays the same.
 
 Let's compile and give this a try.
 
 ```shell
 # Build the new Runefile.yaml
-docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune build Runefile.yaml
-...
+$ rune build Runefile.yaml
 
 # Run the docker to call rune run command
-$ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
+$ rune run food.rune --image ramen.jpg
 
 # you should see an output like this
 
-[xxx INFO  runicos_base::image] Serial: {"type_name":"&str","channel":2,"elements":["Barbacoa","Fried_chicken","Spaghetti"],"dimensions":[3]}
+[xxx INFO hotg_runicos_base::image] Serial: {"type_name":"&str","channel":2,"elements":["Barbacoa","Fried_chicken","Spaghetti"],"dimensions":[3]}
 ```
 
+Voila! Now we just see 3 outputs and they are all proper labels. It has
+classified the Ramen as Barbacoa, fried chicken, and spaghetti in this case.
 
-Voila! Now we just see 3 outputs and they are all proper labels. It has classified the ramen as Barbacoa, fried chicken, and spaghetti in this case. Oh, well the model needs tuning in the future :)
+Oh, well looks like the model needs tuning in the future :)
 
-This iterative way of building and testing Rune demonstrates the composable nature of Rune tools making it extremely powerful for machine learning engineers to build and deliver a containerized model. This pipeline on edge is what we call ***TinyML Ops***. This is how we bring production grade tools for testing, repeat builds, and deployment to TinyML.
+This iterative way of building and testing Rune demonstrates the composable
+nature of Rune tools making it extremely powerful for machine learning engineers
+to build and deliver a containerized model. This pipeline on edge is what we
+call ***TinyML Ops***. This is how we bring production grade tools for testing,
+repeat builds, and deployment to TinyML.
 
 ## How about on the phone?
 Runes are magical - we can deploy this rune on a phone using our Rune app sdk (open source as well!) and you will be able to add the ability to run TF Lite models on the phone.
@@ -495,3 +550,5 @@ docker run -e RUST_LOG=INFO -v /d/mydir/food/static:/app/static tinyverseml/rune
 [tfhub]: https://tfhub.dev/s?deployment-format=lite&module-type=image-classification&publisher=google
 [food]: https://tfhub.dev/google/aiy/vision/classifier/food_V1/1
 [style-transfer]: https://github.com/hotg-ai/rune/blob/f329875633f0141f51342a17b64b273953f3b364/examples/style_transfer/Runefile.yml
+[ramen]: https://raw.githubusercontent.com/hotg-ai/test-runes/master/image/food/assets/original_ramen.jpeg
+[food-labels]: https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv
