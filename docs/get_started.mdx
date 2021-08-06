@@ -1,19 +1,64 @@
 ---
 title: Building a Rune - Quick Tutorial
-sidebar_label: Get Started
+sidebar_label: Getting Started
 slug: /
 ---
 
-In this tutorial we will go from 0-60 on how to build a Rune, run it, serve it, and test it on a mobile app. 
-
-**Note** : this tutorial walks us through using an intel Mac (or linux), but windows is very similar with just a few changes to how the paths to the commands are invoked. There is a note at the end about Windows for your reference. We do not support M1/Arm Mac yet due to an issue with the docker container.
+In this tutorial we will go from 0-60 on how to build a Rune, run it, serve it,
+and test it on a mobile app.
 
 ## Setup and installation
+
+There are a variety of installation methods you may use depending on your
+development environment.
+
+To use Rune you need:
+
+- The `rune` CLI tool (see below)
+- [The Rust compiler and toolchain][rustup] for compiling Runes to WebAssembly
+- The `tinyverseml/rune-serve` Docker image for making your Rune accessible
+  without needing to upload to a registry
+
+### GitHub Releases
+
+Pre-compiled bundles containing the `rune` CLI tool and examples are available
+on [our GitHub Releases page][latest-release] as the `rune.$target.zip` asset,
+where `$target` is the [target triple][target-triple] corresponding to your OS
+(e.g.  `x86_64-apple-darwin` for x86 MacOS).
+
+For those who like to live on the bleeding edge, [our nightly release][nightly]
+contains the same assets but automatically generated from `master` every 24
+hours.
+
+### Install from Source
+
+The `rune` CLI tool can be installed just like a normal Rust tool.
+
+From crates.io:
+
+```console
+$ cargo install hotg-rune-cli
+```
+
+Directly from [the GitHub repository][rune-repo] (either `master` or a tagged
+version):
+
+```console
+$ cargo install --git https://github.com/hotg-ai/rune hotg-rune-cli
+
+$ cargo install --git https://github.com/hotg-ai/rune hotg-rune-cli --rev v0.4.0
+```
+
+### Docker
+
+Alternatively, you can use a docker image if you don't want to install the
+`rune` CLI on your machine.
+
 
 * We use docker for building, running, and serving runes. So make sure you have docker installed on your platform. We support the following platforms for building a rune:
   - Mac (intel). M1/Arm chips are currently not supported.
   - Windows 10
-  - Linux Ubuntu 16 and later 
+  - Linux Ubuntu 16 and later
 * Once you have docker installed you can pull the two docker containers hotg has built. Run these commands on your command line:
 
 ```shell
@@ -29,7 +74,7 @@ $ docker pull tinyverseml/rune-serve
 
 ## Start with a model
 
-At the time of launch Runes are supporting Tensorflow Lite image models. We are rapidly expanding beyond image models into audio, nlp, and other types of models shortly. We also have other types of models beyond Tensorflow on our roadmap. [Tensorflow Lite](https://www.tensorflow.org/lite) and further [Tensorflow micro](https://www.tensorflow.org/lite/microcontrollers) allow us to build TinyML applications. 
+At the time of launch Runes are supporting Tensorflow Lite image models. We are rapidly expanding beyond image models into audio, nlp, and other types of models shortly. We also have other types of models beyond Tensorflow on our roadmap. [Tensorflow Lite](https://www.tensorflow.org/lite) and further [Tensorflow micro](https://www.tensorflow.org/lite/microcontrollers) allow us to build TinyML applications.
 
 Rune helps make these models portable across devices and platforms!
 
@@ -64,7 +109,7 @@ $ cd food
 $ cp /path/to/food.tflite ./
 ```
 
-Let us first inspect the model to understand the inputs and outputs. We have written a rune command called model-info to help with that. 
+Let us first inspect the model to understand the inputs and outputs. We have written a rune command called model-info to help with that.
 
 ```shell
 # in the food directory, call rune via docker (‘nix OS):
@@ -177,11 +222,11 @@ $ ls
 Runefile.yaml food.rune food.tflite
 ```
 
-You should see a food.rune file that is created from this file. The name food was chosen based on the parent directory which is called food. You can pass the --output argument to the rune command to generate the filename of your choice. 
+You should see a food.rune file that is created from this file. The name food was chosen based on the parent directory which is called food. You can pass the --output argument to the rune command to generate the filename of your choice.
 
 ### Run the rune
 
-Running the rune on the terminal is an easy way to check if the rune is working correctly. 
+Running the rune on the terminal is an easy way to check if the rune is working correctly.
 In order to run the rune we need a sample image of food. [Download this image of food](https://raw.githubusercontent.com/hotg-ai/test-runes/master/image/food/assets/original_ramen.jpeg) and place it in the same directory where the model, runefile and .rune are located. Lets call it ramen.jpg
 
 We are going to run the food.rune file and ask it to predict what is in the ramen.jpg image.
@@ -195,7 +240,7 @@ $ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/
 [xxx INFO  runicos_base::image] Serial: {"type_name":"u8","channel":2,"elements":[0,0,0,0,0,0,0,0...0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"dimensions":[2024]}
 ```
 
-In fact there are many more zeros in the elements, I have trimmed it here for display. 
+In fact there are many more zeros in the elements, I have trimmed it here for display.
 
 You should notice a few things:
 * We called rune run on food.rune and passed it the capability image pointing to the location of the image (current directory). Runefile had declared that we needed a capability image remember!
@@ -206,16 +251,16 @@ However, we have proved here that the rune worked, but we cannot say if it was r
 
 ## Adding processing blocks to runes
 
-To make sense of the model output we need to process it and make it more human readable. 
+To make sense of the model output we need to process it and make it more human readable.
 
-First, lets add labels to the output. The model output is a probability vector of dimension 2024, corresponding to a background class and one of 2023 food dishes in the labelmap. This is described in the TF Hub page for the [food models in the output section](https://tfhub.dev/google/aiy/vision/classifier/food_V1/1). 
+First, lets add labels to the output. The model output is a probability vector of dimension 2024, corresponding to a background class and one of 2023 food dishes in the labelmap. This is described in the TF Hub page for the [food models in the output section](https://tfhub.dev/google/aiy/vision/classifier/food_V1/1).
 
-So to see all the labels download the CSV file linked on that page: [https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv](https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv). There are 2024 items in that list. 
+So to see all the labels download the CSV file linked on that page: [https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv](https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv). There are 2024 items in that list.
 
 We can supply this list in the Runefile as a block to process after the model block output. See the code below
 
 
-#### **Note**: We have trimmed the list for display here. The full list and the full yaml file can be found here: 
+#### **Note**: We have trimmed the list for display here. The full list and the full yaml file can be found here:
 https://github.com/hotg-ai/test-runes/blob/master/image/food/Runefile.yml
 
 
@@ -275,7 +320,7 @@ Let's compile and give this a try.
 ```shell
 # Build the new Runefile.yaml
 docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune build Runefile.yaml
-... 
+...
 
 # Run the docker to call rune run command
 $ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
@@ -358,7 +403,7 @@ Let's compile and give this a try.
 ```shell
 # Build the new Runefile.yaml
 docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune build Runefile.yaml
-... 
+...
 
 # Run the docker to call rune run command
 $ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune run food.rune --capability=image:./ramen.jpg
@@ -369,21 +414,21 @@ $ docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/
 ```
 
 
-Voila! Now we just see 3 outputs and they are all proper labels. It has classified the ramen as Barbacoa, fried chicken, and spaghetti in this case. Oh, well the model needs tuning in the future :) 
+Voila! Now we just see 3 outputs and they are all proper labels. It has classified the ramen as Barbacoa, fried chicken, and spaghetti in this case. Oh, well the model needs tuning in the future :)
 
 This iterative way of building and testing Rune demonstrates the composable nature of Rune tools making it extremely powerful for machine learning engineers to build and deliver a containerized model. This pipeline on edge is what we call ***TinyML Ops***. This is how we bring production grade tools for testing, repeat builds, and deployment to TinyML.
 
 ## How about on the phone?
-Runes are magical - we can deploy this rune on a phone using our Rune app sdk (open source as well!) and you will be able to add the ability to run TF Lite models on the phone. 
+Runes are magical - we can deploy this rune on a phone using our Rune app sdk (open source as well!) and you will be able to add the ability to run TF Lite models on the phone.
 
 We have built a mobile app that allows you to test your Runes instantly on the app and evaluate how it performs. This ability to deploy runes immediately on the phone for testing is what makes Rune tools so powerful to build tinyML apps for edge devices. It is all about the speed of testing in a production-like environment.
 
 
-First download the Runic mobile app from the app store. 
+First download the Runic mobile app from the app store.
 * [iOS](https://apps.apple.com/us/app/runic-by-hotg-ai/id1550831458)
 * [Android](https://play.google.com/store/apps/details?id=ai.hotg.runicapp&hl=en_US&gl=US)
 
-Next you need to **serve** the food.rune you just built to be deployed to the phone. In order to do that we are going to use a rune-serve docker image. 
+Next you need to **serve** the food.rune you just built to be deployed to the phone. In order to do that we are going to use a rune-serve docker image.
 
 Follow along:
 
@@ -436,7 +481,7 @@ Feel free to reach out to us using the [Get Help link page](/docs/get_help).
 
 ## Note on Windows
 
-The tutorial commands were all using a ‘nix system - Mac intel or linux system. Windows also works but the paths in the command cannot be dynamic. 
+The tutorial commands were all using a ‘nix system - Mac intel or linux system. Windows also works but the paths in the command cannot be dynamic.
 So here is how it can work on windows:
 
 * Make sure you have installed docker on windows. Specifically you need to ues the following resources:
@@ -444,7 +489,7 @@ So here is how it can work on windows:
  - Then need to install docker on windows - https://docs.docker.com/docker-for-windows/install/
 * Use windows powershell
 * Replace the dynamic path in the docker command like `pwd` with the specific full path
-* Do not use full path like this: D:\mydir\food but it should be /d/mydir/food 
+* Do not use full path like this: D:\mydir\food but it should be /d/mydir/food
 * For example here are the commands to build, run, and serve on windows:
 
 ```shell
@@ -454,3 +499,9 @@ docker run -v /d/mydir/food:/d/mydir/food -w /d/mydir/food  -i -t tinyverseml/ru
 
 docker run -e RUST_LOG=INFO -v /d/mydir/food/static:/app/static tinyverseml/rune-serve
 ```
+
+[latest-release]: https://github.com/hotg-ai/rune/releases/latest
+[nightly]: https://github.com/hotg-ai/rune/releases/tag/nightly
+[rustup]: https://rustup.rs/
+[rune-repo]: https://github.com/hotg-ai/rune
+[target-triple]: https://doc.rust-lang.org/nightly/rustc/platform-support.html
