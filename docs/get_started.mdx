@@ -36,14 +36,14 @@ The `rune` CLI tool can be installed just like a normal Rust tool.
 
 From crates.io:
 
-```console
+```shell
 $ cargo install hotg-rune-cli
 ```
 
 Directly from [the GitHub repository][rune-repo] (either `master` or a tagged
 version):
 
-```console
+```shell
 $ cargo install --git https://github.com/hotg-ai/rune hotg-rune-cli
 
 $ cargo install --git https://github.com/hotg-ai/rune hotg-rune-cli --rev v0.4.0
@@ -53,7 +53,6 @@ $ cargo install --git https://github.com/hotg-ai/rune hotg-rune-cli --rev v0.4.0
 
 Alternatively, you can use a docker image if you don't want to install the
 `rune` CLI on your machine.
-
 
 * We use docker for building, running, and serving runes. So make sure you have docker installed on your platform. We support the following platforms for building a rune:
   - Mac (intel). M1/Arm chips are currently not supported.
@@ -67,55 +66,35 @@ $ docker pull tinyverseml/rune-cli
 $ docker pull tinyverseml/rune-serve
 ```
 
-* **Info only** : The docker containers are built using the following open source libraries. Feel free to read the code if you want:
-  - https://github.com/hotg-ai/rune - the main repository for rune cli tools
-  - https://github.com/hotg-ai/rune-serve - the repository for rune serving
+## Finding a Model
 
+The first step of creating a Rune is to find (or train) a Machine Learning Model
+that matches your application.
 
-## Start with a model
+Developers embedding Rune in their applications can provide inference backends
+for any model type they want, but by default Rune comes with support for
+[TensorFlow Lite][tflite].
 
-At the time of launch Runes are supporting Tensorflow Lite image models. We are rapidly expanding beyond image models into audio, nlp, and other types of models shortly. We also have other types of models beyond Tensorflow on our roadmap. [Tensorflow Lite](https://www.tensorflow.org/lite) and further [Tensorflow micro](https://www.tensorflow.org/lite/microcontrollers) allow us to build TinyML applications.
+Several pre-trained TensorFlow Lite models are available for download from the
+[TF Hub][tfhub], so let's head over and download one.
 
-Rune helps make these models portable across devices and platforms!
+For this application we'll be using an *Image Classification* model called
+[` aiy/vision/classifier/food_V1`][food] which has been trained to detect
+different foods in an image.
 
-You can download several TF Lite models from the [TF Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification&publisher=google).
+If you scroll down to the *"Model Formats"* section there is a *"TFLite"* tab
+with a download link.
 
-For this tutorial we are going to use the [food detection model](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification&publisher=google).
- - Head over to https://tfhub.dev/google/lite-model/aiy/vision/classifier/food_V1/1
- - Select the Tab TFLite (aiy/vision/classifier/food_V1) in the model format section (see below)
+![TensorFlow Lite model download](/img/tflite-download.png)
 
-![TF Lite model download](/img/tflite-download.png)
+For convenience, let's give the model file a more usable name like
+`food.tflite`.
 
- - Download the model - this should be a .tflite file (for example: lite-model_aiy_vision_classifier_food_V1_1.tflite)
- - Rename this file to **food.tflite** for ease of naming for now
-
-
- ## Code setup
-
-***Our end goal is to create a Rune file from the food.tflite model, and then serve it using rune-serve so we can actually test it on a phone in real time!***
-
-Follow these instructions on your terminal (powershell for windows):
+We can use the `rune` command to inspect `food.tflite` and see what its inputs
+and outputs are.
 
 ```shell
-$ mkdir make-my-own-runes
-
-$ cd make-my-own-runes
-
-$ mkdir food
-
-$ cd food
-
-# copy food.tflite into this directory
-$ cp /path/to/food.tflite ./
-```
-
-Let us first inspect the model to understand the inputs and outputs. We have written a rune command called model-info to help with that.
-
-```shell
-# in the food directory, call rune via docker (‘nix OS):
-$ docker run -v `pwd`:`pwd` -w `pwd` -i -t tinyverseml/rune-cli /usr/local/bin/rune model-info food.tflite
-
-# you should see something like:
+$ rune model-info food.tflite
 Ops: 33
 Inputs:
 	input: UInt8[1, 192, 192, 3]
@@ -123,79 +102,86 @@ Outputs:
 	MobilenetV1/Predictions/Softmax: UInt8[1, 2024]
 ```
 
+We can see that the input is one 192x192 image which has 8-bit RGB pixels and
+the output is a 1x2024-element array of unsigned 8-bit integers. Presumably
+these `u8` values are a "confidence" value and there is one for each type of
+food the model was trained on.
 
-This model-info output tells us the following:
-- The input image to the model is 192*192 pixels with 3 channels (RGB)
-- The output is a softmax layer output of unsigned int of 2024 dimension with type as defined in https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/DataType
+ ## Creating the Runefile
 
+ Machine learning is about more than just training models, at some point you
+ will need to read data from the real world, process that raw data into
+ something the model expects, and do some post-processing to turn the model's
+ output into something your application can use.
 
-With this knowledge we can now start the process of creating a Rune. We start by creating a Runefile. A Runefile is a [yaml](https://en.wikipedia.org/wiki/YAML) file format that captures our whole tinyML ops flow.
+All of this is done using a Runefile, a special YAML file which `rune` can use
+to compile the machine learning pipeline into executable WebAssembly code.
 
-So let's get started:
+First create a new folder with an empty `Runefile.yml` and copy `food.tflite`
+into it.
 
 ```shell
-# in the food directory
-$ touch Runefile.yaml
-
+$ mkdir food && cd food
+$ touch Runefile.yml
+$ cp ~/Dowloads/food.tflite .
 $ ls
 Runefile.yaml food.tflite
 ```
 
-Fire up your favorite editor and lets author Runefile.yaml
+Now we can flesh out the Runefile.
 
 ```yaml
----
+version: 1
 image: runicos/base
+
 pipeline:
- image:
-   capability: IMAGE
-   outputs:
-     - type: U8
-       dimensions:
-         - 192
-         - 192
-         - 3
-   args:
-     width: 192
-     height: 192
-     pixel_format: "@PixelFormat::RGB"
- food:
-   model: "./food.tflite"
-   inputs:
-     - image
-   outputs:
-     - type: U8
-       dimensions:
-         - 2024
- serial:
-   out: SERIAL
-   inputs:
-     - food
+  image:
+    capability: IMAGE
+    outputs:
+    - type: u8
+      dimensions: [1, 192, 192, 3]
+    args:
+      width: 192
+      height: 192
+      pixel_format: "@PixelFormat::RGB"
+  classify:
+    model: "food.tflite"
+    inputs:
+    - image
+    outputs:
+    - type: u8
+      dimensions: [1, 2024]
+  serial:
+    out: SERIAL
+    inputs:
+    - classify
 ```
 
-Runefile describes a machine learning pipeline construction that allows you to lay down the flow of operations. Think of Runefile as a static graph of the ops, which will then run in the order you want on the device.
+This specifies a machine learning pipeline which reads a `u8[1, 192, 192, 3]`
+from an `IMAGE` capability called `image`, passes it to the `food.tflite` model
+which we've named `classify`, and sends the resulting `u8[1, 2024]` to a
+`SERIAL` output called `serial`.
 
-For example here is a pipeline for an audio model:
+The `rune graph` command makes this a lot easier to visualise:
 
-![Rune pipeline](/img/rune-flow.png)
+```shell
+$ rune graph Runefile.yml | dot -Tpng > food.png
+```
 
-This pipeline will:
+![Food Pipeline](/img/food-pipeline.png)
 
-1. Ask the Rune runtime for audio data
-2. Convert the audio from raw samples to spectrum showing the distribution of each frequency (words are easier to recognize in this form)
-3. Pass the pre-processed audio to a TensorFlow Lite model
-4. Take the list of confidences generated by the model and turn them into human-readable labels
-5. Print the labelled output to the screen
+This is a relatively simple linear pipeline, but Rune's ability for abstraction
+really shines with more complex pipelines like [*Style Transfer*][style-transfer].
 
-Visit [Runefile reference](/docs/reference/runefile_yml) to learn more.
+![Style Transfer Pipeline](/img/style-transfer-pipeline.png)
 
-Coming back to the Runefile.yaml we just authored our pipeline so far looks like this:
+The *Style Transfer* Rune takes the "style" from one image (e.g. a painting),
+derives a "style vector" for it, and tries to apply that style to another image.
 
-1. *image: runicos/base* directive, tells the Rune runtime which image to use when loading the Rune
-2. Ask the Rune runtime for image data with the capability of image. The dimensions of the image is the same dimensions that we had seen earlier with rune model-info command - unsigned 8 bit int 192 * 192 * 3 with the pixelformat in RGB
-3. Pass the image to a TensorFlow Lite model with input as the image and output as what we saw in the rune model-info command - unsigned 8 bit int of dimension 2048.
-4. Print the labelled output to the screen (serial) taking the model (food) stage as input
+Imagine having an app on your phone that lets you take a photo and see what it
+would look as a Van Gogh.
 
+Visit [Runefile reference](/docs/reference/runefile_yml) to learn how to write.
 
 ## Let's take it for a spin
 
@@ -505,3 +491,7 @@ docker run -e RUST_LOG=INFO -v /d/mydir/food/static:/app/static tinyverseml/rune
 [rustup]: https://rustup.rs/
 [rune-repo]: https://github.com/hotg-ai/rune
 [target-triple]: https://doc.rust-lang.org/nightly/rustc/platform-support.html
+[tflite]: https://www.tensorflow.org/lite
+[tfhub]: https://tfhub.dev/s?deployment-format=lite&module-type=image-classification&publisher=google
+[food]: https://tfhub.dev/google/aiy/vision/classifier/food_V1/1
+[style-transfer]: https://github.com/hotg-ai/rune/blob/f329875633f0141f51342a17b64b273953f3b364/examples/style_transfer/Runefile.yml
