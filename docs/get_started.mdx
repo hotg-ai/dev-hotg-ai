@@ -34,13 +34,24 @@ hours.
 
 The `rune` CLI tool can be installed just like a normal Rust tool.
 
-From crates.io:
+As well as requiring [the Rust toolchain](https://rustup.rs/), the Rune project
+uses several native dependencies so you will need to install the following
+before building:
+
+- [`bindgen`](https://github.com/rust-lang/rust-bindgen) (`cargo install bindgen`)
+- [Clang and LLVM](https://releases.llvm.org/download.html)
+- [CMake](https://cmake.org/download/)
+- [Docker](https://docs.docker.com/get-docker/) *(Linux only)*
+- [Bazel](https://docs.bazel.build/versions/main/install.html) *(Windows and MacOS)*
+
+You can then install the Rune CLI from crates.io:
 
 ```shell
 $ cargo install hotg-rune-cli
 ```
 
-Directly from [the GitHub repository][rune-repo] (either `master` or a tagged
+Alternatively, if you want to live on the bleeding edge you can install it
+directly from [the GitHub repository][rune-repo] (either `master` or a tagged
 version):
 
 ```shell
