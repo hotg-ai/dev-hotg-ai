@@ -1,0 +1,28 @@
+name: Continuous Integration
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ github.workflow }}-${{ github.job }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build
+      # Note: we only want to deploy when pushing directly to master
+      - name: Deploy
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        run: firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
