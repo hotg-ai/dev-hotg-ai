@@ -24,5 +24,10 @@ jobs:
         run: yarn build
       # Note: we only want to deploy when pushing directly to master
       - name: Deploy
+        uses: w9jds/firebase-action@master
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        run: firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
+        with:
+          args: deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          
