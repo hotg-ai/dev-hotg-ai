@@ -6,6 +6,14 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
+const logEvent = (msg) => {
+  try {
+    firebase.analytics().logEvent(msg)
+  } catch (e) {
+    console.warn("Can't find firebase analytics", msg, e)
+  }
+}
+
 const features = [
   {
     title: 'Development at warp speed',
@@ -76,13 +84,46 @@ export default function Home() {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
+            
             <Link
               className={clsx(
-                'button button--outline button--primary button--lg',
+                'button button--primary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/')}>
-              Get Started
+
+              onClick={()=> logEvent('cta-pwa')}
+              to="https://runicjs.web.app/?utm_source=hotg.dev&utm_medium=web&utm_campaign=CTA">
+              PWA
+            </Link>
+            <Link
+              className={clsx(
+                'button button--primary button--lg',
+                styles.getStarted,
+              )}
+
+              onClick={()=> logEvent('cta-ios')}
+              to="https://apps.apple.com/us/app/runic-by-hotg-ai/id1550831458">
+              iOS
+            </Link>
+            <Link
+              className={clsx(
+                'button button--primary button--lg',
+                styles.getStarted,
+              )}
+
+              onClick={()=> logEvent('cta-android')}
+              to="https://play.google.com/store/apps/details?id=ai.hotg.runicapp&hl=en_US&gl=US">
+              Android
+            </Link>
+            <Link
+              className={clsx(
+                'button button--primary button--lg',
+                styles.getStarted,
+              )}
+
+              onClick={()=> logEvent('cta-more')}
+              to="https://github.com/hotg-ai/rune/releases">
+              More
             </Link>
           </div>
         </div>

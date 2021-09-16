@@ -18,10 +18,19 @@
   }
 }
 
-.buttons {
+.buttonsContainer {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  justify-items: center;
+  align-content:center;
 }
 
 .features {
@@ -34,4 +43,8 @@
 .featureImage {
   height: 200px;
   width: 200px;
+}
+
+.getStarted {
+  margin: 5px 0px;
 }
