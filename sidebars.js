@@ -15,6 +15,10 @@ module.exports = {
       id: 'setup'
     },
     {
+      type: 'doc',
+      id: 'getting_started',
+    },
+    {
       type: 'category',
       label: 'Tutorial',
       collapsed: true,
