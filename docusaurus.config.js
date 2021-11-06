@@ -7,8 +7,8 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'hotg-ai', // Usually your GitHub org/user name.
-  projectName: 'dev.hotg.ai', // Usually your repo name.
+  organizationName: 'hotg-ai',
+  projectName: 'dev.hotg.ai',
   themeConfig: {
 
     forceDarkMode: true,
@@ -33,22 +33,12 @@ module.exports = {
           label: 'Documentation',
           position: 'left',
         },
-        // {
-        //   to: 'runevm',
-        //   label: 'RuneVM',
-        //   position: 'left',
-        // },
-        {href: 'https://Tinyverse.substack.com', label: 'Blog', position: 'left'},
-        {href: 'https://hotg.ai', label: 'hotg.ai', position: 'right'},
+        { href: 'https://Tinyverse.substack.com', label: 'Blog', position: 'left' },
+        { href: 'https://hotg.ai', label: 'hotg.ai', position: 'right' },
         {
           href: 'https://github.com/hotg-ai/rune',
           label: 'GitHub',
           position: 'right',
-        },
-        {
-          href: 'https://tinyverse.discourse.group',
-          label: 'Forums',
-          position: 'left'
         },
         {
           href: 'https://discord.gg/gPCNNvRnF4',
@@ -77,14 +67,6 @@ module.exports = {
         {
           title: 'Community',
           items: [
-            // {
-            //   label: 'Stack Overflow',
-            //   href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            // },
-            // {
-            //   label: 'Discord',
-            //   href: 'https://discordapp.com/invite/docusaurus',
-            // },
             {
               label: 'Twitter',
               href: 'https://twitter.com/hotg_ai',
@@ -118,22 +100,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl:
             'https://github.com/hotg-ai/dev.hotg.ai/edit/master/docs/',
         },
-        // blog: {
-        //   showReadingTime: true,
-        //   // Please change this to your repo.
-        //   editUrl:
-        //     'https://github.com/hotg-ai/dev.hotg.ai/edit/master/blog/',
-        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        pages: {
-          
-        }
+        pages: {}
       },
     ],
   ],
