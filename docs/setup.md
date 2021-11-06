@@ -5,7 +5,8 @@ slug: /
 ---
 
 If you just want to try out Rune without installing anything, head over to
-[the tutorial](/docs/tutorials/lesson-1) for links to our online playground.
+[the tutorial](/docs/tutorials/lesson-1/README) for links to our online
+playground.
 
 To use Rune, you will need the following:
 
