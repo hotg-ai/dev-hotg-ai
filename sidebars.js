@@ -2,16 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 const docs = path.join(__dirname, "docs");
-const lessonDir = path.join(docs, "tutorials", "lessons");
-const lessons = [];
+const tutorials = path.join(docs, "tutorials");
 
-for (const dir of fs.readdirSync(lessonDir)) {
-  const readme = path.join(lessonDir, dir, "README.md");
-
-  if (fs.existsSync(readme)) {
-    lessons.push(path.join("tutorials", "lessons", dir, "README"));
-  }
-}
+const lessons = fs.readdirSync(tutorials)
+  .filter(dir => dir.includes("lesson-") && fs.existsSync(path.join(tutorials, dir, "README.md")))
+  .map(dir => path.join("tutorials", dir, "README"));
 
 module.exports = {
   docs: [
