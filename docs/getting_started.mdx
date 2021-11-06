@@ -1,81 +1,11 @@
 ---
 title: Building a Rune - Quick Tutorial
 sidebar_label: Getting Started
-slug: /
+slug: /getting-started
 ---
 
 In this tutorial we will go from 0-60 on how to build a Rune, run it, serve it,
 and test it on a mobile app.
-
-## Setup and installation
-
-There are a variety of installation methods you may use depending on your
-development environment.
-
-To use Rune you need:
-
-- The `rune` CLI tool (see below)
-- [The Rust compiler and toolchain][rustup] for compiling Runes to WebAssembly
-- The `tinyverseml/rune-serve` Docker image for making your Rune accessible
-  without needing to upload to a registry
-
-### GitHub Releases
-
-Pre-compiled bundles containing the `rune` CLI tool and examples are available
-on [our GitHub Releases page][latest-release] as the `rune.$target.zip` asset,
-where `$target` is the [target triple][target-triple] corresponding to your OS
-(e.g.  `x86_64-apple-darwin` for x86 MacOS).
-
-For those who like to live on the bleeding edge, [our nightly release][nightly]
-contains the same assets but automatically generated from `master` every 24
-hours.
-
-### Install from Source
-
-The `rune` CLI tool can be installed just like a normal Rust tool.
-
-As well as requiring [the Rust toolchain](https://rustup.rs/), the Rune project
-uses several native dependencies so you will need to install the following
-before building:
-
-- [`bindgen`](https://github.com/rust-lang/rust-bindgen) (`cargo install bindgen`)
-- [Clang and LLVM](https://releases.llvm.org/download.html)
-- [CMake](https://cmake.org/download/)
-- [Docker](https://docs.docker.com/get-docker/) *(Linux only)*
-- [Bazel](https://docs.bazel.build/versions/main/install.html) *(Windows and MacOS)*
-
-You can then install the Rune CLI from crates.io:
-
-```shell
-$ cargo install hotg-rune-cli
-```
-
-Alternatively, if you want to live on the bleeding edge you can install it
-directly from [the GitHub repository][rune-repo] (either `master` or a tagged
-version):
-
-```shell
-$ cargo install --git https://github.com/hotg-ai/rune hotg-rune-cli
-
-$ cargo install --git https://github.com/hotg-ai/rune hotg-rune-cli --rev v0.4.0
-```
-
-### Docker
-
-Alternatively, you can use a docker image if you don't want to install the
-`rune` CLI on your machine.
-
-* We use docker for building, running, and serving runes. So make sure you have docker installed on your platform. We support the following platforms for building a rune:
-  - Mac (intel). M1/Arm chips are currently not supported.
-  - Windows 10
-  - Linux Ubuntu 16 and later
-* Once you have docker installed you can pull the two docker containers hotg has built. Run these commands on your command line:
-
-```shell
-$ docker pull tinyverseml/rune-cli
-
-$ docker pull tinyverseml/rune-serve
-```
 
 ## Finding a Model
 

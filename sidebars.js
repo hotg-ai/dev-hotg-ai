@@ -12,7 +12,11 @@ module.exports = {
   docs: [
     {
       type: 'doc',
-      id: 'get_started'
+      id: 'setup'
+    },
+    {
+      type: 'doc',
+      id: 'getting_started',
     },
     {
       type: 'category',
@@ -23,10 +27,6 @@ module.exports = {
     {
       type: 'doc',
       id: 'overview'
-    },
-    {
-      type: 'doc',
-      id: 'get_rune'
     },
     {
       type: 'category',
