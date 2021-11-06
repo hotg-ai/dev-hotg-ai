@@ -12,7 +12,7 @@ module.exports = {
   docs: [
     {
       type: 'doc',
-      id: 'get_started'
+      id: 'setup'
     },
     {
       type: 'category',
