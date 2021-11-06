@@ -25,10 +25,6 @@ module.exports = {
       id: 'overview'
     },
     {
-      type: 'doc',
-      id: 'get_rune'
-    },
-    {
       type: 'category',
       label: 'Reference Docs',
       collapsed: false,
