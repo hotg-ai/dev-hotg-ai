@@ -3,16 +3,16 @@ title: Installation Guide
 sidebar_label: Installing Tinyverse Tools
 ---
 
-Rune and the dependant toolchains used to generate bytecode require some dependencies. Rune is built using Rust programming language. 
+Rune and the dependant toolchains used to generate bytecode require some dependencies. Rune is built using Rust programming language.
 
 ## Installing rune cli by building (Not Recommended)
 You can install rune cli by building it for Mac and Linux platform by following the instructions provided in the Rune github repository - https://github.com/hotg-ai/rune/blob/master/CONTRIBUTING.md
 
-Because there are many dependencies that are nightly the rune binary can be a bit flaky.  
+Because there are many dependencies that are nightly the rune binary can be a bit flaky.
 
-To make it easier to use, you can leverage [docker](https://www.docker.com/)! 
+To make it easier to use, you can leverage [docker](https://www.docker.com/)!
 
-We have pre-built docker images that have been tested across all platforms and are stable. 
+We have pre-built docker images that have been tested across all platforms and are stable.
 
 Our images are available on [our docker hub](https://hub.docker.com/repository/docker/tinyverseml).
 
@@ -29,7 +29,7 @@ With Docker we support the following platforms.
 You can use `docker run` to use `rune-cli` directly in your local directory. The following shell script will execute `rune-cli` using volumes in your local directory.
 ```shell
 #! sh
-docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune $@%   
+docker run -v `pwd`:`pwd` -w `pwd`  -i -t tinyverseml/rune-cli /usr/local/bin/rune $@%
 ```
 
 Save the shell script in your PATH variable and you are ready to go! Now you can use `rune` as a command on the terminal.
@@ -66,7 +66,7 @@ docker run -e RUST_LOG=INFO -v /path/to/directory/static:/app/static tinyverseml
 ** Note about Apple Mac M1 Arm chip **
 
 Currently Docker on M1 is still unstable and is not supported! We are working on this actively follow our progress
-on (github)[https://github.com/hotg-ai/rune/issues/174].  
+on (github)[https://github.com/hotg-ai/rune/issues/174].
 
 
 

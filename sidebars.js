@@ -27,13 +27,8 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'get_help'
-    },
-    {
-      type: 'doc',
       id: 'overview'
     },
-
     {
       type: 'doc',
       id: 'get_rune'
@@ -48,16 +43,8 @@ module.exports = {
       ],
     },
     {
-      type: 'category',
-      label: 'Develop with Rune',
-      items: [
-        'develop/hello_world'
-      ]
-    },
-    {
       type: 'doc',
       id: 'contribute'
     },
-
   ],
 };
