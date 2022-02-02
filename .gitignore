@@ -19,5 +19,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
 .firebase
+
+# We use yarn around here
+package-lock.json
