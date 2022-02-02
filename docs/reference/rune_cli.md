@@ -88,7 +88,7 @@ dimensions and element types used as input/output. The possible values for
 `element_kind` correspond to the `TfLiteType` enum variants in [`
 tensorflow/tensorflow/lite/c/c_api_types.h `][data-type] header file, and are
 named similarly to that used in [the `outputs`
-section](./runefile_yml.md#outputs) of a Runefile.
+section](./runefile.md#outputs) of a Runefile.
 
 ## Build (`rune build`)
 
@@ -482,6 +482,6 @@ $ rune version --verbose --format json
 ```
 
 [data-type]: https://github.com/tensorflow/tensorflow/blob/acf39b7d5f03568d35fa57b856bcf8593c147612/tensorflow/lite/c/c_api_types.h#L62-L81
-[cap]: runefile_yml.md#capabilities
+[cap]: runefile.md#capabilities
 [gv]: https://graphviz.org/
 [debug-runefile]: https://github.com/hotg-ai/rune/blob/0e5c7076baa5c4075db94a778020ad47bbbe8672/examples/debugging/Runefile.yml

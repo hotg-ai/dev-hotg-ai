@@ -1,7 +1,6 @@
+
 ---
-title: Building a Rune - Quick Tutorial
-sidebar_label: Getting Started
-slug: /getting-started
+title: Building a Rune
 ---
 
 In this tutorial we will go from 0-60 on how to build a Rune, run it, serve it,

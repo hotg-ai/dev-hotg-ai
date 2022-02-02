@@ -1,7 +1,6 @@
 ---
 title: Setup and Installation
 sidebar_label: Setup and Installation
-slug: /
 ---
 
 If you just want to try out Rune without installing anything, head over to
