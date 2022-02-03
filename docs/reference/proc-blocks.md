@@ -97,10 +97,10 @@ It reduces noise and applies a gain control algorithm within each frequency bin.
 This proc-block normalizes the input to the range `[0, 1]`.
 
   - Types
-          - Supported input types - `u8, u16, u32, u64, i8, i16, i32, i64, f32, f64` 
-          - Supported output types - `f32`
+    - Supported input types - `u8, u16, u32, u64, i8, i16, i32, i64, f32, f64` 
+    - Supported output types - `f32`
   - args
-      - Count - number of classes with highest confidence you want as output
+    - Count - number of classes with highest confidence you want as output
 
 ### 11. object_filter
 
@@ -111,8 +111,8 @@ A proc-block which takes 3-d tensor `[1, num_detection, detection_box(x, y, w, h
 giving a 2-d tensor with dimension `[*, 6]` (where * is the total number of detected objects and 6 -> `[ x-coordinate, y-coordinate, h, w, confidence_value, label_index]`) as output. It is used in object detection models.
 
   - Types
-        - Supported input types - `f32` 
-        - Supported output types - `f32`
+    - Supported input types - `f32` 
+    - Supported output types - `f32`
   - args
       - Threshold - remove the objects with confidence value below this threshold
 
@@ -122,8 +122,8 @@ giving a 2-d tensor with dimension `[*, 6]` (where * is the total number of dete
  helpful in doing non-ML tasks.
  
    - Types
-          - Supported input types - `utf8`
-          - Supported output types - `u8, u16, u32, u64, i8, i16, i32, i64, f32, f64` 
+        - Supported input types - `utf8`
+        - Supported output types - `u8, u16, u32, u64, i8, i16, i32, i64, f32, f64` 
       
 ### 13. segment_output
 
