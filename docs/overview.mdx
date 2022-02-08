@@ -1,0 +1,83 @@
+---
+title: Welcome to the Tinyverse
+slug: /
+---
+
+The Tinyverse is an ecosystem of tools for rapidly developing Machine Learning
+applications and deploying them on edge devices.
+
+Check out our workshop from [QHacks 2022][qhacks] for a whirlwind overview of
+the Tinyverse and to see how Forge can develop and deploy Runes.
+
+import ReactPlayer from "react-player"
+
+<ReactPlayer controls width="100%" url="https://www.youtube.com/watch?v=tytpelD128s&t=91s" />
+
+## Meet The Tinyverse
+
+### Tensors
+
+The most fundamental component in a machine learning application is the tensor,
+a multidimensional array of numbers.
+
+You will often see tensors written like `f32[1, 256, 256, 3]`. This is short for
+a 1 x 256 x 256 x 3 tensor containing 32-bit floating point numbers.
+
+What this tensor represents will depend entirely on the context it is used in.
+
+### Machine Learning Pipeline
+
+Machine learning applications work by taking information from the outside world,
+passing it through a neural net (often referred to as a "model"), and using the
+results to achieve something.
+
+The raw information is often not in a form that is immediately usable for the
+model, so the data may go through one or more intermediate transformations.
+Common pre-processing transformations are normalizing all inputs to be between
+`0` and `1`, or transforming an audio clip from the time domain (i.e. volume
+over time) to the frequency domain (signal strength per frequency).
+
+Similarly, the model's results will often need to be post-processed before they
+can be given to the main application.
+
+This entire system of inputs, outputs, models, and processing is called the
+*Machine Learning Pipeline*.
+
+### The Runefile
+
+A Runefile is a YAML file that declares the layout for a particular machine
+learning pipeline. This is consumed by the Rune compiler in order to generate a
+Rune.
+
+### Rune
+
+A Rune is the executable form of a machine learning pipeline.
+
+The Rune compiler takes a Runefile and compiles it to a WebAssembly module that
+can be distributed to any device running the Rune runtime.
+
+### Forge
+
+Forge is a browser-based graphical UI for creating and deploying Runes.
+
+Developers can use the Forge SDK to automatically retrieve deployed Runes from
+Forge for integration into their edge applications. The Forge SDK can also be
+configured to send telemetry back to Forge to give developers greater
+observability into their Rune's performance.
+
+### The Runtime
+
+The Rune runtime is a library that acts as the bridge between a Rune and the
+application that uses it. It manages loading and executing the WebAssembly
+module, plus provides model handlers for various Machine Learning frameworks.
+
+## What Now?
+
+Now you know a bit more about the Tinyverse it's time to build your first Rune!
+
+Check out [the Forge chapter](/docs/forge/overview) for an introduction to
+building and deploying Runes with Forge. Otherwise if the low-level details are
+more your thing, you may want to read through [the section on
+Rune](/docs/rune/overview).
+
+[qhacks]: https://qhacks.io/
