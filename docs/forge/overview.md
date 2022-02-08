@@ -9,7 +9,7 @@ Nodes can be broken down into four types described below:
 1.  **Capability**
     A capability node is how information from the outside world enters the pipeline. Capability is simplified interfaces to your device that help you get data from sensors into your edgeML pipeline. Go ahead and filter the left side list using the search bar to see the ones we have!
 
-<img width="347" alt="image2" src="https://user-images.githubusercontent.com/50593567/152220774-a7fe171f-0aae-4af5-83e9-6f8a88d16cb8.png">
+<img width="347" alt="image2" src="https://user-images.githubusercontent.com/50593567/152220774-a7fe171f-0aae-4af5-83e9-6f8a88d16cb8.png" />
 
 Currently, we support five types of capabilities:
 
