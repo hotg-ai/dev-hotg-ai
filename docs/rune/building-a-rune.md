@@ -121,7 +121,7 @@ derives a "style vector" for it, and tries to apply that style to another image.
 Imagine having an app on your phone that lets you take a photo and see what it
 would look as a Van Gogh.
 
-Visit [Runefile reference](/docs/reference/runefile_yml) to learn how to write.
+Visit [Runefile reference](/docs/reference/runefile) to learn how to write.
 
 ## Let's take it for a spin
 
