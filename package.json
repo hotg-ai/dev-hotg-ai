@@ -22,7 +22,8 @@
     "jsdom": "^16.5.2",
     "prism-react-renderer": "^1.2.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-player": "^2.9.0"
   },
   "browserslist": {
     "production": [

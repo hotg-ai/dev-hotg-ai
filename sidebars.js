@@ -12,11 +12,12 @@ module.exports = {
   docs: [
     {
       type: 'doc',
-      id: 'getting_started',
+      id: 'overview',
     },
     {
       type: 'category',
       label: 'Forge',
+      collapsed: false,
       items: [
         'forge/overview',  // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
         'forge/javascript-sdk',
@@ -27,6 +28,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Rune',
+      collapsed: false,
       items: [
         'rune/overview',
         'rune/install',
