@@ -1,7 +1,6 @@
+
 ---
-title: Building a Rune - Quick Tutorial
-sidebar_label: Getting Started
-slug: /getting-started
+title: Building a Rune
 ---
 
 In this tutorial we will go from 0-60 on how to build a Rune, run it, serve it,
@@ -122,7 +121,7 @@ derives a "style vector" for it, and tries to apply that style to another image.
 Imagine having an app on your phone that lets you take a photo and see what it
 would look as a Van Gogh.
 
-Visit [Runefile reference](/docs/reference/runefile_yml) to learn how to write.
+Visit [Runefile reference](/docs/reference/runefile) to learn how to write.
 
 ## Let's take it for a spin
 
