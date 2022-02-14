@@ -55,11 +55,7 @@ After being satisfied with the testing, you are ready to deploy your rune. When 
 
 We have created some [getting started tutorials](https://github.com/hotg-ai/forge-runtime-examples) that can help you quickly deploy your rune.
 
+We have created few templates which contain ML pipeline for can be use to quickly 
 ## Templates
 
-We have created few templates to get you started with building ML pipeline.
-
-1. Empty Template: Play with a simple example to learn how to build a random number generator.
-2. Microspeech: This template contains a microspeech model and pipeline for keyword spotting classification on the edge.
-3. Inception: This template contains a inception model and pipeline for image classification on the edge.
-4. MobileBert Q&A: This template contains BERT model and pipeline for running Question & Answer (Q&A) on the edge. The model outputs an answer to a question from a given text.
+We have created few templates of (CV, Audio, NLP). You can use them to learn how to create a ML pipeline.
