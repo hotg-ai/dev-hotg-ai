@@ -1,6 +1,6 @@
 # Overview
 
-Forge is a simplified GUI for generating Runefiles. One can quickly build, test, and deploy their edgeML applications. The main concept is to make a "pipeline". An ML pipeline will take inputs from the outside world, performs some processing/operation, and send the output back to the outside world. One can create a ML pipeline by doing drag and drop node from the left-side panel.
+Forge is a simplified GUI for generating Runefiles. One can quickly build, test, and deploy their edgeML applications. The main concept is to make a "pipeline". An ML pipeline will take inputs from the outside world, performs some processing/operation, and send the output back to the outside world. One can create an ML pipeline by dragging and dropping nodes from the left-side panel.
 
 ## Nodes
 
@@ -15,7 +15,6 @@ Currently, we support five types of capabilities:
 
 - Accelerometer
   A capability that will let you collect accelerometer data in a tuple of 3 from your device. This is valuable for gesture detection.
-
 - Image
   This capability will let you import video and image streams to your edge container. This is a great computer vision application!
 - Sound
@@ -42,10 +41,10 @@ The idea is to **train, build, test, and deploy**!
 You can start with choosing an ML model from the left side panel or could train one for yourself. If you have trained your model yourself, you can upload it into the studio through the _Upload Models Button_ (top right corner). You can see your model in the _My Nodes_ section. Drag and drop the model into the _canvas_.
 
 **Build**
-Work with your imagination and start building cool ML pipelines. The pipeline will guide the flow of data. Once you are done with the pipeline hit the `Build Button`. It will create the _Rune_ for you.
+Work with your imagination and start building cool ML pipelines. The pipeline will guide the flow of data. Once you are done with the pipeline, hit the `Build Button`. It will create the _Rune_ for you.
 
 **Test**
-Once the build is complete, you can access the _Test Button_. Click on the Test Button and scan the QR code using the Runic Mobile app. If you are not satisfied with testing, you can tweak the model's training. Re-train it to get a model with higher accuracy. Train, Test, Repeat!
+Once the build is complete, you can access the _Test Button_. Click on the Test Button and scan the QR code using the Runic Mobile app. If you are not satisfied with testing, you can tweak the model's training parameters. Re-train it to get a model with higher accuracy. Train, Test, Repeat!
 
 **Deploy**
 After being satisfied with the testing, you are ready to deploy your rune. When you click on the Deploy Button, you can see we provide two SDKs (_more are coming_) for interacting with Forge.
@@ -55,7 +54,6 @@ After being satisfied with the testing, you are ready to deploy your rune. When 
 
 We have created some [getting started tutorials](https://github.com/hotg-ai/forge-runtime-examples) that can help you quickly deploy your rune.
 
-We have created few templates which contain ML pipeline for can be use to quickly 
 ## Templates
 
-We have created few templates of (CV, Audio, NLP). You can use them to learn how to create a ML pipeline.
+We have created a few templates of (CV, Audio, NLP). You can use them to learn how to create an ML pipeline.
