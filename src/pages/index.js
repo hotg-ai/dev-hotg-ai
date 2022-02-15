@@ -77,13 +77,17 @@ export default function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`TinyML tools from ${siteConfig.title}`}
+      title={`Rust based containers for ${siteConfig.title}`}
       description="Making every edge smarter">
       <header className={clsx('hero hero--dark', styles.heroBanner)}>
         <div className="container">
+        <div className="col col-4 text--center">
+          <img  src="img/orchestrate.svg" width="256" />
+        </div>
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className={styles.buttons}>
+      
+          {/* <div className={styles.buttons}>
             
             <Link
               className={clsx(
@@ -125,10 +129,10 @@ export default function Home() {
               to="https://github.com/hotg-ai/rune/releases">
               More
             </Link>
-          </div>
+          </div> */}
         </div>
       </header>
-      <main>
+      {/* <main>
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
@@ -140,7 +144,7 @@ export default function Home() {
             </div>
           </section>
         )}
-      </main>
+      </main> */}
     </Layout>
   );
 }

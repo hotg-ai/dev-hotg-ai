@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'Tinyverse',
-  tagline: 'Tools to build, deploy and manage TinyML apps',
+  title: 'Rune',
+  tagline: 'Rust and Webassembly based containers for EdgeML',
   url: 'https://hotg.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -21,7 +21,7 @@ module.exports = {
       disableSwitch: true
     },
     navbar: {
-      title: 'Tinyverse',
+      title: 'Rune - Edge Containers',
       logo: {
         alt: 'Tinyverse',
         src: 'img/logo.svg',
