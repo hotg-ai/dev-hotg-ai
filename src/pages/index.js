@@ -80,13 +80,13 @@ function Badges({}) {
   return (
     <div style={{flexDirection:"row", justifyContent:"space-between", alignItems:"center"}}>
       <a href="https://github.com/hotg-ai/rune">
-        <img style={{marginLeft:"5px"}} alt="GitHub Repo stars" src="https://img.shields.io/github/stars/hotg-ai/rune?style=social" />
+        <img style={{marginLeft:"5px", height:"40px"}} alt="GitHub Repo stars" src="https://img.shields.io/github/stars/hotg-ai/rune?style=social" />
       </a>
       <a href="https://discord.gg/gPCNNvRnF4">
-      <img style={{marginLeft:"5px"}}  alt="Discord" src={"https://img.shields.io/discord/843552361212805180?logo=discord&style=social"} />
+      <img style={{marginLeft:"5px", height:"40px"}}  alt="Discord" src={"https://img.shields.io/discord/843552361212805180?logo=discord&style=social"} />
       </a>
       <a href="https://crates.io/crates/hotg-rune-core">
-      <img style={{marginLeft:"5px"}}  alt="Crates.io" src={"https://img.shields.io/crates/d/hotg-rune-core?label=crates.io&style=social"} />
+      <img style={{marginLeft:"5px", height:"40px"}}  alt="Crates.io" src={"https://img.shields.io/crates/d/hotg-rune-core?label=crates.io&style=social"} />
       </a>
     </div>
   )
@@ -98,11 +98,15 @@ export default function Home() {
   return (
     <Layout
       title={`Rust based containers for ${siteConfig.title}`}
-      description="Making every edge smarter">
-      <header className={clsx('hero hero--dark', styles.heroBanner)}>
+      description="Making every Edge smarter">
+      <header className={clsx('hero ', styles.heroBanner)}>
         <div className="container">
-        <div className="col col-4 text--center">
-          <img  src="img/orchestrate.svg" width="256" />
+        <div className="col col-4 text--center" >
+          <div style={{alignItems: "center", justifyContent:"center", flexDirection:"row", display:"flex"}}>
+            <div style={{width:"256px", height:"256px", backgroundColor:"#EEE", padding:"20px", borderRadius:"50%"}}>
+            <img  src="img/reliable_dev.svg" width="256" style={{ }} />
+            </div>
+          </div>
         </div>
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>

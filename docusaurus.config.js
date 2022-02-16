@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'Rune',
-  tagline: 'Rust and Webassembly based containers for EdgeML',
+  title: 'MLOps for the edge',
+  tagline: 'Portable containers for EdgeML built on Rust and Webassembly',
   url: 'https://hotg.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -14,11 +14,11 @@ module.exports = {
     forceDarkMode: true,
     colorMode: {
       // "light" | "dark"
-      defaultMode: 'dark',
+      defaultMode: "light",
 
       // Hides the switch in the navbar
       // Useful if you want to support a single color mode
-      disableSwitch: true
+      disableSwitch: false
     },
     navbar: {
       title: 'Rune - Edge Containers',
@@ -53,7 +53,7 @@ module.exports = {
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
           title: 'Docs',

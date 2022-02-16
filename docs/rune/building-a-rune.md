@@ -1,6 +1,6 @@
-
 ---
 title: Building a Rune
+sidebar_label: Containerize a ML pipeline
 ---
 
 In this tutorial we will go from 0-60 on how to build a Rune, run it, serve it,

@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Forge',
+      label: 'Studio - No Code Env',
       collapsed: false,
       items: [
         'forge/overview',  // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
@@ -27,7 +27,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Rune',
+      label: 'Rune - CLI Config',
       collapsed: false,
       items: [
         'rune/overview',
