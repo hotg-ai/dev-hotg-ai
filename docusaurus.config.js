@@ -1,6 +1,6 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'MLOps for the edge',
+  title: 'MLOps for the Edge',
   tagline: 'Portable containers for EdgeML built on Rust and Webassembly',
   url: 'https://hotg.dev',
   baseUrl: '/',

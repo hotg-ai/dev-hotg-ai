@@ -8,6 +8,7 @@ const lessons = fs.readdirSync(tutorials)
   .filter(dir => dir.includes("lesson-") && fs.existsSync(path.join(tutorials, dir, "README.md")))
   .map(dir => path.join("rune", "tutorials", dir, "README"));
 
+
 module.exports = {
   docs: [
     {
