@@ -8,15 +8,17 @@ const lessons = fs.readdirSync(tutorials)
   .filter(dir => dir.includes("lesson-") && fs.existsSync(path.join(tutorials, dir, "README.md")))
   .map(dir => path.join("rune", "tutorials", dir, "README"));
 
+
 module.exports = {
   docs: [
     {
       type: 'doc',
-      id: 'getting_started',
+      id: 'overview',
     },
     {
       type: 'category',
-      label: 'Forge',
+      label: 'Studio - No Code Env',
+      collapsed: false,
       items: [
         'forge/overview',  // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
         'forge/javascript-sdk',
@@ -26,7 +28,8 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Rune',
+      label: 'Rune - CLI Config',
+      collapsed: false,
       items: [
         'rune/overview',
         'rune/install',

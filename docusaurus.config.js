@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'Tinyverse',
-  tagline: 'Tools to build, deploy and manage TinyML apps',
+  title: 'MLOps for the Edge',
+  tagline: 'Portable containers for EdgeML built on Rust and Webassembly',
   url: 'https://hotg.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -14,14 +14,14 @@ module.exports = {
     forceDarkMode: true,
     colorMode: {
       // "light" | "dark"
-      defaultMode: 'dark',
+      defaultMode: "light",
 
       // Hides the switch in the navbar
       // Useful if you want to support a single color mode
-      disableSwitch: true
+      disableSwitch: false
     },
     navbar: {
-      title: 'Tinyverse',
+      title: 'Rune - Edge Containers',
       logo: {
         alt: 'Tinyverse',
         src: 'img/logo.svg',
@@ -53,7 +53,7 @@ module.exports = {
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
           title: 'Docs',
