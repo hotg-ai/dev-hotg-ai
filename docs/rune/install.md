@@ -4,7 +4,7 @@ sidebar_label: Setup and Installation
 ---
 
 If you just want to try out Rune without installing anything, head over to
-[the tutorial](./tutorials/lesson-1/README) for links to our online
+[the tutorial](/docs/rune/tutorials/lesson-1/README) for links to our online
 playground.
 
 To use Rune, you will need the following:
