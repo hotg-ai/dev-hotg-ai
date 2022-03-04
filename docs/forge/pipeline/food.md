@@ -1,3 +1,5 @@
+# YOLO
+
 An image classification model that classifies foods from images.
 
 The first step of creating a Rune is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the _Food Classification_ model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of Food Classification. It will show the Input/Output information. This information will be used to build the ML Pipeline.

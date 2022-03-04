@@ -1,3 +1,5 @@
+# Yolo
+
 An object detection model that localizes objects in an image on the edge.
 
 The first step of creating an ML pipeline is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the YOLO model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of the YOLO. It will show the Input/Output information. This information will be used to build the ML Pipeline.
