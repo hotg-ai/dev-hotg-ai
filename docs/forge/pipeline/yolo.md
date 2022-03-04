@@ -2,7 +2,7 @@ An object detection model that localizes objects in an image on the edge.
 
 The first step of creating an ML pipeline is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the YOLO model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of the YOLO. It will show the Input/Output information. This information will be used to build the ML Pipeline.
 
-<img width="279" alt="image7" src="https://user-images.githubusercontent.com/50593567/156831169-bf7851c9-8331-4601-abd7-6a2a77bf8402.png">
+<img width="279" alt="image7" src="https://user-images.githubusercontent.com/50593567/156831169-bf7851c9-8331-4601-abd7-6a2a77bf8402.png"/>
 
 Looking at the input, we can say the model will take a `320 x 320 RGB` (because the channel is 3) image as input. The input type is `f32`, but last time we saw that we could take u8 image as input. So, we will need a proc-bock that will convert `u8` to `f32` type. For this, we have image_normalization proc-block. It will take the `u8` image matrix and normalize their values to the range `[0, 1]` as `f32`. We have got all our nodes sorted out for the YOLO model. The output is a `3-d` tensor with format `[1, num_detection, detection_box(x, y, w, h) + confidence_scores + total_detection_classes]`. We can see the number of detections is `6500`. It means there will be multiple bounding boxes for every single object. We will have to ​​filter the
 detected objects to:
