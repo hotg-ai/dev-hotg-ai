@@ -19,13 +19,3 @@ import path (i.e. you import from `@hotg-ai/forge/telemetry` instead of
 As a precaution, the `package.json` in this folder sets `"private": true` to
 make sure you don't accidentally run `yarn publish` directly.
 
-## License
-
-This project is licensed under either of
-
--   Apache License, Version 2.0, ([LICENSE-APACHE](/docs/forge/ts/LICENSE-APACHE.md) or
-    http://www.apache.org/licenses/LICENSE-2.0)
--   MIT license ([LICENSE-MIT](/docs/forge/ts/LICENSE-MIT.md) or
-    http://opensource.org/licenses/MIT)
-
-at your option.

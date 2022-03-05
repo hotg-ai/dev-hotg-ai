@@ -3,7 +3,7 @@ title: Typescript SDK
 subtitle: Studio Deployments on the Edge
 ---
 
-ForgeSDK is a TypeScript SDK for the [Studio](/docs/forge/ts/https://studio.hotg.ai) SaaS integration into your app. This SDK will let you execute 
+ForgeSDK is a TypeScript SDK for the [Studio](https://studio.hotg.ai) SaaS integration into your app. This SDK will let you execute 
 deployments given a deployment id and client secret. ForgeSDK is available on npm as a typescript library.
 
 `npm install @hotg-ai/forge`
