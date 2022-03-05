@@ -21,7 +21,7 @@ module.exports = {
       disableSwitch: false
     },
     navbar: {
-      title: 'Rune - Edge Containers',
+      title: 'EdgeML Containers',
       logo: {
         alt: 'Tinyverse',
         src: 'img/logo.svg',
@@ -33,7 +33,7 @@ module.exports = {
           label: 'Documentation',
           position: 'left',
         },
-        { href: 'https://Tinyverse.substack.com', label: 'Blog', position: 'left' },
+        { href: 'https://tinyverse.substack.com', label: 'Blog', position: 'left' },
         { href: 'https://hotg.ai', label: 'hotg.ai', position: 'right' },
         {
           href: 'https://github.com/hotg-ai/rune',

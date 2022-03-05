@@ -1,4 +1,4 @@
-# YOLO
+# Food
 
 An image classification model that classifies foods from images.
 

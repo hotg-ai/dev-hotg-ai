@@ -2,6 +2,8 @@
 
 Forge is a simplified GUI for generating Runefiles. One can quickly build, test, and deploy their edgeML applications. The main concept is to make a "pipeline". An ML pipeline will take inputs from the outside world, performs some processing/operation, and send the output back to the outside world. One can create an ML pipeline by dragging and dropping nodes from the left-side panel.
 
+  <div style={{position: 'relative', paddingBottom: '62.5%', height: 0}}><iframe src="https://www.loom.com/embed/d41b93db902c4b6db3d9ff62c0fe8a52" frameBorder={0} webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} /></div>
+
 ## Nodes
 
 Nodes can be broken down into four types described below:

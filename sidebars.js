@@ -21,38 +21,10 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Studio - No Code Env",
+      label: "Rune",
       collapsed: false,
       items: [
-        "forge/overview", // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
-        "forge/javascript-sdk",
-        "forge/dart-sdk",
-        "forge/native-sdk",
-        {
-          type: "category",
-          label: "Pipeline",
-          collapsed: true,
-          items: [
-            "forge/pipeline/bird_classifier",
-            "forge/pipeline/food",
-            "forge/pipeline/gesture_recognition",
-            "forge/pipeline/inception",
-            "forge/pipeline/microspeech",
-            "forge/pipeline/mobileBert",
-            "forge/pipeline/mobileNet",
-            "forge/pipeline/person_detection",
-            "forge/pipeline/plant_classifier",
-            "forge/pipeline/yolo",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Rune - CLI Config",
-      collapsed: false,
-      items: [
-        "rune/overview",
+        // "rune/overview",
         "rune/install",
         "rune/building-a-rune",
         {
@@ -63,6 +35,41 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Forge",
+      collapsed: false,
+      items: [
+        "forge/overview", // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
+        {
+          type: "category",
+          label: "Forge SDK",
+          items: [
+            "forge/javascript-sdk",
+            "forge/dart-sdk",
+            "forge/native-sdk",
+          ],
+        },
+        {
+          type: "category",
+          label: "Studio Pipeline Examples",
+          collapsed: true,
+          items: [
+            "forge/pipeline/bird_classifier",
+            "forge/pipeline/food",
+            "forge/pipeline/gesture_recognition",
+            "forge/pipeline/inception",
+            "forge/pipeline/mobileNet",
+            "forge/pipeline/person_detection",
+            "forge/pipeline/plant_classifier",
+            "forge/pipeline/yolo",
+            "forge/pipeline/microspeech",
+            "forge/pipeline/mobileBert",
+          ],
+        },
+      ],
+    },
+  
     {
       type: "category",
       label: "The Reference",
