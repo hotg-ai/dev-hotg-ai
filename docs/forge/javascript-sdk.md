@@ -22,10 +22,10 @@ import { Parameters, useForge, registerBackend, OutputValue } from "@hotg-ai/for
 // Tell forge to use the tflite model handler
 registerBackend(backend());
 
-// Provide your apiKey and deploymentId
+// Provide your apiKey and deploymentId from Hammer Forge Studio https://studio.hotg.ai
 const forgeConfig: Parameters = {
     apiKey: "c8b2fa8916040a0daea179b3c2a55edfa8d415c2",
-    deploymentId: 7
+    deploymentId: "bd919ee2-e04f-4808-bf15-0b392adc10c5" 
 };
 
 // Create a React Component to use the Forge Hook
@@ -93,47 +93,47 @@ export default function App() {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-# API Reference
+# @hotg-ai/forge
 
 ## Table of contents
 
-### Classes
+### ./ts/classes
 
-- [Forge](ts/classes/Forge.md)
+- [Forge](./ts/classes/Forge.md)
 
 ### Type aliases
 
-- [Evaluate](ts/modules.md#evaluate)
-- [ForgeHook](ts/modules.md#forgehook)
-- [Inputs](ts/modules.md#inputs)
-- [OutputValue](ts/modules.md#outputvalue)
-- [Parameters](ts/modules.md#parameters)
+- [Evaluate](./ts/modules.md#evaluate)
+- [ForgeHook](./ts/modules.md#forgehook)
+- [Inputs](./ts/modules.md#inputs)
+- [OutputValue](./ts/modules.md#outputvalue) 
+- [Parameters](./ts/modules.md#parameters)
 
 ### Functions
 
-- [default](ts/modules.md#default)
-- [registerBackend](ts/modules.md#registerbackend)
-- [useForge](ts/modules.md#useforge)
+- [default](./ts/modules.md#default)
+- [registerBackend](./ts/modules.md#registerbackend)
+- [useForge](./ts/modules.md#useforge)
 
 ## Type aliases
 
 ### Evaluate
 
-Ƭ **Evaluate**: (`inputs`: [`Inputs`](ts/modules.md#inputs) \| `ReadInput`) => [`OutputValue`](ts/modules.md#outputvalue)[]
+Ƭ **Evaluate**: (`inputs`: [`Inputs`](./ts/modules.md#inputs) \| `ReadInput`) => [`OutputValue`](./ts/modules.md#outputvalue)[]
 
 #### Type declaration
 
-▸ (`inputs`): [`OutputValue`](ts/modules.md#outputvalue)[]
+▸ (`inputs`): [`OutputValue`](./ts/modules.md#outputvalue)[]
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `inputs` | [`Inputs`](ts/modules.md#inputs) \| `ReadInput` |
+| `inputs` | [`Inputs`](./ts/modules.md#inputs) \| `ReadInput` |
 
 ##### Returns
 
-[`OutputValue`](ts/modules.md#outputvalue)[]
+[`OutputValue`](./ts/modules.md#outputvalue)[]
 
 ___
 
@@ -191,14 +191,14 @@ ___
 | `apiKey` | `string` | An API key used to authenticate with the Forge backend. |
 | `backend?` | ``"forge"`` \| ``"enterprise"`` | Choose which backend to fetch Runes from.  If not provided, defaults to Forge. |
 | `baseURL?` | `string` | Override the base URL used for the interacting with the backend.  This is normally only used when using the enterprise backend, routing requests through a proxy, or developing Forge itself. |
-| `deploymentId` | `number` | The identifier of the Rune being deployed. |
+| `deploymentId` | `string` | The identifier of the Rune being deployed. |
 | `telemetry?` | `Partial`<`TelemetryConfig`\> \| ``null`` | Configuration for the telemetry system.  The default config is used if this field is undefined. If an object is provided, any fields that are set will override the corresponding field from the default config.  Set to null to opt out of telemetry. |
 
 ## Functions
 
 ### default
 
-▸ **default**(`parameters`, `signal?`): `Promise`<[`Evaluate`](ts/modules.md#evaluate)\>
+▸ **default**(`parameters`, `signal?`): `Promise`<[`Evaluate`](./ts/modules.md#evaluate)\>
 
 Load a Rune from the Forge backend.
 
@@ -206,14 +206,12 @@ Load a Rune from the Forge backend.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `parameters` | [`Parameters`](ts/modules.md#parameters) | arguments used to specify how a Rune is loaded from the Forge backend. |
+| `parameters` | [`Parameters`](./ts/modules.md#parameters) | arguments used to specify how a Rune is loaded from the Forge backend. |
 | `signal?` | `AbortSignal` | a signal that can be used to abort a pending download. |
 
 #### Returns
 
-`Promise`<[`Evaluate`](ts/modules.md#evaluate)\>
-
-Prediction of the values and inference
+`Promise`<[`Evaluate`](./ts/modules.md#evaluate)\>
 
 ___
 
@@ -237,7 +235,7 @@ ___
 
 ### useForge
 
-▸ **useForge**(`params?`): [`ForgeHook`](ts/modules.md#forgehook)
+▸ **useForge**(`params?`): [`ForgeHook`](./ts/modules.md#forgehook)
 
 A React hook which will try to load a Rune from Forge in the background.
 
@@ -245,10 +243,10 @@ A React hook which will try to load a Rune from Forge in the background.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params?` | [`Parameters`](ts/modules.md#parameters) | parameters used for loading the Rune. |
+| `params?` | [`Parameters`](./ts/modules.md#parameters) | parameters used for loading the Rune. |
 
 #### Returns
 
-[`ForgeHook`](ts/modules.md#forgehook)
+[`ForgeHook`](./ts/modules.md#forgehook)
 
 the loaded Rune, or an object representing the state
