@@ -52,6 +52,13 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Tutorial",
+          items: [
+            "forge/tutorial/lobe_ai"
+          ]
+        },
+        {
+          type: "category",
           label: "Studio Pipeline Examples",
           collapsed: true,
           items: [
