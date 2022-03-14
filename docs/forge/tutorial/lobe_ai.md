@@ -1,5 +1,5 @@
 ---
-title: Using Lobe.ai with Forge
+title: Rapid Prototyping CV Models using Lobe.ai with Forge
 sidebar_label: Custom CV models using Lobe.ai
 ---
 
