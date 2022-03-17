@@ -21,22 +21,6 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Rune",
-      collapsed: false,
-      items: [
-        // "rune/overview",
-        "rune/install",
-        "rune/building-a-rune",
-        {
-          type: "category",
-          label: "Tutorial",
-          collapsed: true,
-          items: lessons,
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Forge",
       collapsed: false,
       items: [
@@ -44,18 +28,12 @@ module.exports = {
         {
           type: "category",
           label: "Forge SDK",
-          items: [
-            "forge/javascript-sdk",
-            "forge/dart-sdk",
-            "forge/native-sdk",
-          ],
+          items: ["forge/javascript-sdk", "forge/dart-sdk", "forge/native-sdk"],
         },
         {
           type: "category",
           label: "Tutorial",
-          items: [
-            "forge/tutorial/lobe_ai"
-          ]
+          items: ["forge/tutorial/lobe_ai"],
         },
         {
           type: "category",
@@ -76,7 +54,22 @@ module.exports = {
         },
       ],
     },
-  
+    {
+      type: "category",
+      label: "Rune",
+      collapsed: false,
+      items: [
+        "rune/overview",
+        "rune/install",
+        "rune/building-a-rune",
+        {
+          type: "category",
+          label: "Tutorial",
+          collapsed: true,
+          items: lessons,
+        },
+      ],
+    },
     {
       type: "category",
       label: "The Reference",
