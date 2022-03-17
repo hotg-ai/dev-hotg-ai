@@ -10,7 +10,12 @@ Comparing input with the image format: `[batch_size, height, width, channels]`, 
 
 1. Drag an Image from the Inputs:
    We will set the output type to `u8` and dimensions to `[1, 224, 224, 3]` because, as we saw above, this is the format needed by our model.
-   The IMAGE capability takes the following arguments: - width - the image's width in pixels - height - the image's height in pixels - pixel-format - the format used by the pixels. Possible values are: - @PixelFormat::Grayscale - @PixelFormat::RGB
+   The IMAGE capability takes the following arguments:
+   - width - the image's width in pixels
+   - height - the image's height in pixels
+   - pixel-format - the format used by the pixels. Possible values are:
+     - @PixelFormat::Grayscale
+     - @PixelFormat::RGB
 2. Drag the Bird Classifier model from the left side panel.
 3. We have got the output score for all three classes from our model. We want to find out which `3` classes with the highest score so that later we can print that class name as output. To get the index of class with the highest confidence value, we will use _most_confident_indices_ proc-block (a proc block which, when given a list of confidences, will return the indices of the top N most confident values). So, drag the _most_confident_indices_ proc-block from the left side pan.
    <img width="284" alt="image13" src="https://user-images.githubusercontent.com/50593567/156823188-e778ac78-929b-4457-ab09-8539cd5860c6.png"/>
