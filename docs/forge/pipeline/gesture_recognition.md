@@ -6,7 +6,7 @@ The first step of creating an ML pipeline is finding (or training) a Machine Lea
 
 <img width="283" alt="Screenshot 2022-03-05 at 12 24 36 AM" src="https://user-images.githubusercontent.com/50593567/156824567-688934ed-0958-41c6-910f-fcc29b8197fd.png"/>
 
-Comparing input with the image format: [`batch_size, height, width, channels]`, we can see the model will take a `224 x 224` RGB image (because the channel is 3). The input image type is `u8`, i.e., all the values will lie between [`0, 255`]. The output is an array of size [`1, 2]`. The model will return a list with scores for `2` labels. We will have to find the top score and their associated labels. Now, we have understood how the data will flow, let’s start with creating the ML pipeline.
+Comparing input with the image format: `[batch_size, height, width, channels]`, we can see the model will take a `224 x 224` RGB image (because the channel is 3). The input image type is `u8`, i.e., all the values will lie between `[0, 255]`. The output is an array of size `[1, 2]`. The model will return a list with scores for `2` labels. We will have to find the top score and their associated labels. Now, we have understood how the data will flow, lets start with creating the ML pipeline.
 
 1. Drag an Image from the  Inputs:
 We will set the output type to `u8` and dimensions to `[1, 224, 224, 3]` because, as we saw above, this is the format needed by our model.
