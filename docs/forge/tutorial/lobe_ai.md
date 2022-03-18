@@ -5,13 +5,16 @@ sidebar_label: Custom CV models using Lobe.ai
 
 # Using Lobe.ai with Forge
 
-In this tutorial you will learn how to make a custom model using Lobe.ai and test it using forge!
+In this tutorial you will learn how to make a custom model using Lobe.ai and test it using forge! We want to demonstrate how easy it is to from training a model to actually testing and using it in real world on your phone. 
+The steps are:
+
+1. Creating a custom model with Lobe.ai
+2. Packaging the model with Hammer Forge Studio
+3. Testing the model with the Forge test suite and mobile app
 
 ## Setup
 
 Get [Lobe.ai](https://www.lobe.ai/)! Lobe.ai is a rapid training tool for machine learning models. Currently, it supports computer vision models but they have more model types coming soon.
-
-<iframe width={560} height={315} src="https://www.youtube.com/embed/Mdcw3Sb98DA" title="YouTube video player" frameBorder={0} allowFullScreen ></iframe>
 
 Get an account a free [Studio](https://studio.hotg.ai/) account. Using studio you will be able to build
 the ML pipeline around your ML Pipeline. 
