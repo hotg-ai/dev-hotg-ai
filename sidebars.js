@@ -108,5 +108,11 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Cool Ideas",
+      collapsed: false,
+      items: ["cool-ideas/controlling-nodes"],
+    },
   ],
 };
