@@ -87,5 +87,26 @@ module.exports = {
       label: "For Rune Developers",
       items: ["internal/contributing"],
     },
+    {
+      type: "category",
+      label: "Videos",
+      collapsed: false,
+      items: [
+        "videos/Forge-overview",
+        "videos/Proc-block",
+        "videos/build-a-pipeline",
+        "videos/test-your-pipeline-with-PWA",
+        {
+          type: "category",
+          label: "TF-to-Tflite",
+          collapsed: true,
+          items: [
+            "videos/TF-to-Tflite/model-optimization-techniques",
+            "videos/TF-to-Tflite/quantization-techniques",
+            "videos/TF-to-Tflite/testing-accuracy-of-quantization-techniques",
+          ],
+        },
+      ],
+    },
   ],
 };
