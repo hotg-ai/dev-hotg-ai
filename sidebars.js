@@ -16,13 +16,20 @@ const lessons = fs
 module.exports = {
   docs: [
     {
-      type: "doc",
-      id: "overview",
+      type: "category",
+      label: "What is HOT-G",
+      collapsed: true,
+      items: [
+        "hot-g/welcome-to-tinyverse",
+        "hot-g/what-hotg-has-created",
+        "hot-g/where-can-hotg-help",
+        "hot-g/how-will-this-benefit-you",
+      ],
     },
     {
       type: "category",
       label: "Forge",
-      collapsed: false,
+      collapsed: true,
       items: [
         "forge/overview", // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
         {
@@ -57,7 +64,7 @@ module.exports = {
     {
       type: "category",
       label: "Rune",
-      collapsed: false,
+      collapsed: true,
       items: [
         "rune/overview",
         "rune/install",
@@ -73,7 +80,7 @@ module.exports = {
     {
       type: "category",
       label: "The Reference",
-      collapsed: false,
+      collapsed: true,
       items: [
         "reference/runefile",
         "reference/capabilities",
@@ -111,7 +118,7 @@ module.exports = {
     {
       type: "category",
       label: "Cool Ideas",
-      collapsed: false,
+      collapsed: true,
       items: ["cool-ideas/controlling-nodes"],
     },
   ],
