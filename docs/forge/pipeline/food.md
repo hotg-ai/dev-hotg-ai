@@ -2,6 +2,8 @@
 
 An image classification model that classifies foods from images.
 
+<img width="815" alt="Screenshot 2022-03-31 at 1 05 01 PM" src="https://user-images.githubusercontent.com/50593567/161002321-9ebc62e3-3803-48b5-8c6a-95145c20b2e9.png">
+
 The first step of creating a Rune is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the _Food Classification_ model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of Food Classification. It will show the Input/Output information. This information will be used to build the ML Pipeline.
 
 <img width="299" alt="image3" src="https://user-images.githubusercontent.com/50593567/156819651-4399f071-539a-483c-9afb-c5821297b381.png"/>

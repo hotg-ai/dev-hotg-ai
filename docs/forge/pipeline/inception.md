@@ -2,6 +2,9 @@
 
 An _image classification_ model recognizes objects when fed with images and their associated labels.
 
+<img width="827" alt="Screenshot 2022-03-31 at 12 59 27 PM" src="https://user-images.githubusercontent.com/50593567/161001452-722aa043-1fb9-4fb5-9ae3-d96490ae2ac7.png">
+
+
 The first step of creating a Rune is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose _Inception_. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of Inception. It will show the Input/Output information. This information will be used to build the ML Pipeline.
 
 <img width="287" alt="image17" src="https://user-images.githubusercontent.com/50593567/156815878-926375d6-307d-4ca8-b3f5-63675b522d83.png"/>
