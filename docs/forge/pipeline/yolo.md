@@ -2,6 +2,8 @@
 
 An object detection model that localizes objects in an image on the edge.
 
+<img width="803" alt="Screenshot 2022-03-31 at 4 41 35 PM" src="https://user-images.githubusercontent.com/50593567/161042372-a5f1a9eb-75c1-4f29-b8ba-f2e3ebb6abc3.png"/>
+
 The first step of creating an ML pipeline is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the YOLO model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of the YOLO. It will show the Input/Output information. This information will be used to build the ML Pipeline.
 
 <img width="279" alt="image7" src="https://user-images.githubusercontent.com/50593567/156831169-bf7851c9-8331-4601-abd7-6a2a77bf8402.png"/>
