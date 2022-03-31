@@ -2,7 +2,7 @@
 
 An image classification model that classifies signs (Thumbs up, Thumbs Down) from images.
 
-<img width="867" alt="Screenshot 2022-03-31 at 1 09 33 PM" src="https://user-images.githubusercontent.com/50593567/161003107-d98ab034-5e11-4dbe-891d-7e66d69c2df6.png">
+<img width="867" alt="Screenshot 2022-03-31 at 1 09 33 PM" src="https://user-images.githubusercontent.com/50593567/161003107-d98ab034-5e11-4dbe-891d-7e66d69c2df6.png"/>
 
 
 The first step of creating an ML pipeline is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the Gesture Recognition model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of Gesture Recognition. It will show the Input/Output information. This information will be used to build the ML Pipeline.

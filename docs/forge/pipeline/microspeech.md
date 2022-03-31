@@ -1,6 +1,6 @@
 # Microspeech
 
-<img width="832" alt="Screenshot 2022-03-31 at 4 21 10 PM" src="https://user-images.githubusercontent.com/50593567/161039017-7e3bba2c-da69-4038-85d5-f973712e8710.png">
+<img width="832" alt="Screenshot 2022-03-31 at 4 21 10 PM" src="https://user-images.githubusercontent.com/50593567/161039017-7e3bba2c-da69-4038-85d5-f973712e8710.png"/>
 
 This example shows how to train a 27 KB model that can recognize 6 keywords, `“silence”, “unknown”, “up”, “down”, “left”, “right”` from speech data. The CNN takes as input the `int8` output of the spectrogram and gives a 4-element vector showing the probability predicted by the model for each of the outcomes.
 

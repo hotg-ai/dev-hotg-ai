@@ -2,7 +2,7 @@
 
 An image classification model that classifies birds from images.
 
-<img width="808" alt="Screenshot 2022-03-31 at 1 02 16 PM" src="https://user-images.githubusercontent.com/50593567/161001924-02333da7-adf3-494a-95f0-31ee30b1defb.png">
+<img width="808" alt="Screenshot 2022-03-31 at 1 02 16 PM" src="https://user-images.githubusercontent.com/50593567/161001924-02333da7-adf3-494a-95f0-31ee30b1defb.png"/>
 
 The first step of creating a Rune is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the Bird Classification model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of Bird Classification. It will show the Input/Output information. This information will be used to build the ML Pipeline.
 

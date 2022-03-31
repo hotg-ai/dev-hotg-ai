@@ -2,7 +2,7 @@
 
 A classification model that classifies plants from images on the edge.
 
-<img width="801" alt="Screenshot 2022-03-31 at 4 37 58 PM" src="https://user-images.githubusercontent.com/50593567/161041784-9f7afcf7-86f4-4157-9dcc-1882be1d654f.png">
+<img width="801" alt="Screenshot 2022-03-31 at 4 37 58 PM" src="https://user-images.githubusercontent.com/50593567/161041784-9f7afcf7-86f4-4157-9dcc-1882be1d654f.png"/>
 
 The first step of creating a Rune is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the Plant Classifier model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of the Plant Classifier. It will show the Input/Output information. This information will be used to build the ML Pipeline.
 

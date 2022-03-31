@@ -1,6 +1,6 @@
 # MobileBert
 
-<img width="840" alt="Screenshot 2022-03-31 at 4 24 08 PM" src="https://user-images.githubusercontent.com/50593567/161039478-f1b85919-5615-4b50-8108-2f6ce13053fe.png">
+<img width="840" alt="Screenshot 2022-03-31 at 4 24 08 PM" src="https://user-images.githubusercontent.com/50593567/161039478-f1b85919-5615-4b50-8108-2f6ce13053fe.png"/>
 
 The Bert Q&A model takes a passage, and a question as input then returns a segment of the passage that most likely answers the question.
 Let’s look at the input/output of the model. Click on the node with the name _Mobile Bert_ to see the input/output of the model.

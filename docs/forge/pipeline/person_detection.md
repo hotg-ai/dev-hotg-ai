@@ -2,7 +2,7 @@
 
 An image classification model takes a grayscale image as input and detects whether a person is present in the image.
 
-<img width="811" alt="Screenshot 2022-03-31 at 4 29 00 PM" src="https://user-images.githubusercontent.com/50593567/161040283-527cbd9e-1b81-4944-b0c0-50a75976d013.png">
+<img width="811" alt="Screenshot 2022-03-31 at 4 29 00 PM" src="https://user-images.githubusercontent.com/50593567/161040283-527cbd9e-1b81-4944-b0c0-50a75976d013.png"/>
 
 The first step of creating an ML pipeline is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the Person Detection model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of Person Detection. It will show the Input/Output information. This information will be used to build the ML Pipeline
 

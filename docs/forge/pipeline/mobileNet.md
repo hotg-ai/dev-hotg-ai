@@ -2,7 +2,7 @@
 
 An image classification model classify objects when fed with images to their associated labels.
 
-<img width="876" alt="Screenshot 2022-03-31 at 4 26 10 PM" src="https://user-images.githubusercontent.com/50593567/161039821-079c9f44-ff44-4f54-90e7-cacb4943428e.png">
+<img width="876" alt="Screenshot 2022-03-31 at 4 26 10 PM" src="https://user-images.githubusercontent.com/50593567/161039821-079c9f44-ff44-4f54-90e7-cacb4943428e.png"/>
 
 The first step of creating an ML pipeline is finding (or training) a Machine Learning Model that matches your application. Here, we have decided to choose the MobileNet model. We will start by knowing the model input/output information. So, click on the model node present inside the studio with the name of MobileNet. It will show the Input/Output information. This information will be used to build the ML Pipeline.
 
