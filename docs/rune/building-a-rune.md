@@ -18,11 +18,11 @@ for any model type they want, but by default Rune comes with support for
 Several pre-trained TensorFlow Lite models are available for download from the
 [TF Hub][tfhub], so let's head over and download one.
 
-For this application we'll be using an *Image Classification* model called
+For this application we'll be using an _Image Classification_ model called
 [` aiy/vision/classifier/food_V1`][food] which has been trained to detect
 different foods in an image.
 
-If you scroll down to the *"Model Formats"* section there is a *"TFLite"* tab
+If you scroll down to the _"Model Formats"_ section there is a _"TFLite"_ tab
 with a download link.
 
 ![TensorFlow Lite model download](/img/tflite-download.png)
@@ -47,12 +47,12 @@ the output is a 1x2024-element array of unsigned 8-bit integers. Presumably
 these `u8` values are a "confidence" value and there is one for each type of
 food the model was trained on.
 
- ## Creating the Runefile
+## Creating the Runefile
 
- Machine learning is about more than just training models, at some point you
- will need to read data from the real world, process that raw data into
- something the model expects, and do some post-processing to turn the model's
- output into something your application can use.
+Machine learning is about more than just training models, at some point you
+will need to read data from the real world, process that raw data into
+something the model expects, and do some post-processing to turn the model's
+output into something your application can use.
 
 All of this is done using a Runefile, a special YAML file which `rune` can use
 to compile the machine learning pipeline into executable WebAssembly code.
@@ -78,8 +78,8 @@ pipeline:
   image:
     capability: IMAGE
     outputs:
-    - type: u8
-      dimensions: [1, 192, 192, 3]
+      - type: u8
+        dimensions: [1, 192, 192, 3]
     args:
       width: 192
       height: 192
@@ -87,14 +87,14 @@ pipeline:
   classify:
     model: "food.tflite"
     inputs:
-    - image
+      - image
     outputs:
-    - type: u8
-      dimensions: [1, 2024]
+      - type: u8
+        dimensions: [1, 2024]
   serial:
     out: SERIAL
     inputs:
-    - classify
+      - classify
 ```
 
 This specifies a machine learning pipeline which reads a `u8[1, 192, 192, 3]`
@@ -111,11 +111,11 @@ $ rune graph Runefile.yml | dot -Tpng > food.png
 ![Food Pipeline](/img/food-pipeline.png)
 
 This is a relatively simple linear pipeline, but Rune's ability for abstraction
-really shines with more complex pipelines like [*Style Transfer*][style-transfer].
+really shines with more complex pipelines like [_Style Transfer_][style-transfer].
 
 ![Style Transfer Pipeline](/img/style-transfer-pipeline.png)
 
-The *Style Transfer* Rune takes the "style" from one image (e.g. a painting),
+The _Style Transfer_ Rune takes the "style" from one image (e.g. a painting),
 derives a "style vector" for it, and tries to apply that style to another image.
 
 Imagine having an app on your phone that lets you take a photo and see what it
@@ -187,6 +187,7 @@ $ rune run food.rune --image ramen.jpeg
 In fact there are many more zeros in the elements (2024 of them!), but we've trimmed it here for display.
 
 You should notice a few things:
+
 - We called `rune run` on `food.rune` and passed it the image we want to
   identify
 - The output is the raw model output from TF lite model with the dimensions 2024
@@ -226,7 +227,7 @@ map.
 
 The page also has a link to [download the label map][food-labels] as a CSV.
 
-We can use this list in the Runefile as a the arguments to a *"label"*
+We can use this list in the Runefile as a the arguments to a _"label"_
 processing block.
 
 (**Note**: We have trimmed the list for display here)
@@ -235,42 +236,51 @@ processing block.
 version: 1
 image: runicos/base
 pipeline:
- image:
-   capability: IMAGE
-   outputs:
-     - type: u8
-       dimensions: [1, 192, 192, 3]
-   args:
-     width: 192
-     height: 192
-     pixel_format: "@PixelFormat::RGB"
- classify:
-   model: "./food.tflite"
-   inputs:
-     - image
-   outputs:
-     - type: u8
-       dimensions: [1, 2024]
- label:
-   proc-block: "hotg-ai/rune#proc_blocks/label"
-   inputs:
-     - classify
-   outputs:
-     - type: UTF8
-       dimensions: [3]
-   args:
-     labels:
-       - __background__
-       - Chaudin
-       - Bambalouni
-       - Ghoriba
-       - Mango_sticky_rice
-       ...
-       - Kondowole
- serial:
-   out: SERIAL
-   inputs:
-     - label
+  image:
+    capability: IMAGE
+    outputs:
+      - type: U8
+        dimensions: [1, 192, 192, 3]
+    args:
+      width: 192
+      height: 192
+      pixel_format: "@PixelFormat::RGB"
+  food:
+    model: "./food.tflite"
+    inputs:
+      - image
+    outputs:
+      - type: U8
+        dimensions: [1, 2024]
+  most_confident_index:
+    proc-block: "hotg-ai/proc-blocks@v0.11.3#most_confident_indices"
+    inputs:
+      - food
+    outputs:
+      - type: U32
+        dimensions: [3]
+    args:
+      count: 3
+  label:
+    proc-block: "hotg-ai/proc-blocks@v0.11.3#label"
+    inputs:
+      - most_confident_index
+    outputs:
+      - type: UTF8
+        dimensions: [1, 3]
+    args:
+      wordlist: |
+        background
+        Chaudin
+        Bambalouni
+        Ghoriba
+        Mango_sticky_rice
+        ...
+        Kondowole
+  serial:
+    out: SERIAL
+    inputs:
+      - label
 ```
 
 Notice the following change in the YAML file now:
@@ -292,81 +302,116 @@ $ rune run food.rune --image ramen.jpeg
 ```
 
 Ok it worked but now it has 2024 elements output and most of them are
-,"__background__" - which is useless for us to check easily.
+,"background" - which is useless for us to check easily.
 
 Lets add another processing block - this time we'll use one that only selects a
 few top predictions. Fortunately, the Rune repo already contains a
-`most_confident` proc bloc we can use.
-
+`most_confident` proc block we can use.
 
 ```yaml
 version: 1
 image: runicos/base
 pipeline:
- image:
-   capability: IMAGE
-   outputs:
-     - type: u8
-       dimensions: [1, 192, 192, 3]
-   args:
-     width: 192
-     height: 192
-     pixel_format: "@PixelFormat::RGB"
- classify:
-   model: "./food.tflite"
-   inputs:
-     - image
-   outputs:
-     - type: u8
-       dimensions: [1, 2024]
- label:
-   proc-block: "hotg-ai/rune#proc_blocks/label"
-   inputs:
-     - classify
-   outputs:
-     - type: UTF8
-       dimensions: [3]
-   args:
-     labels:
-       - __background__
-       - Chaudin
-       - Bambalouni
-       - Ghoriba
-       - Mango_sticky_rice
-       ...
-       - Kondowole
- most_confident:
-   proc-block: "hotg-ai/rune#proc_blocks/most_confident_indices"
-   inputs:
-     - classify
-   outputs:
-     - type: U32
-       dimensions: [3]
-   args:
-     count: 3
- label:
-   proc-block: "hotg-ai/rune#proc_blocks/label"
-   inputs:
-     - most_confident
-   outputs:
-     - type: UTF8
-       dimensions: [3]
-   args:
-     labels:
-       - __background__
-       - Chaudin
-       - Bambalouni
-       - Ghoriba
-       - Mango_sticky_rice
-       ...
-       - Kondowole
- serial:
-   out: SERIAL
-   inputs:
-     - label
+  image:
+    capability: IMAGE
+    outputs:
+      - type: U8
+        dimensions: [1, 192, 192, 3]
+    args:
+      width: 192
+      height: 192
+      pixel_format: "@PixelFormat::RGB"
+  food:
+    model: "./food.tflite"
+    inputs:
+      - image
+    outputs:
+      - type: U8
+        dimensions: [1, 2024]
+  most_confident_index:
+    proc-block: "hotg-ai/proc-blocks@v0.11.3#most_confident_indices"
+    inputs:
+      - food
+    outputs:
+      - type: U32
+        dimensions: [3]
+    args:
+      count: 3
+  label:
+    proc-block: "hotg-ai/proc-blocks@v0.11.3#label"
+    inputs:
+      - most_confident_index
+    outputs:
+      - type: UTF8
+        dimensions: [1, 3]
+    args:
+      wordlist: |
+        background
+        Chaudin
+        Bambalouni
+        Ghoriba
+        Mango_sticky_rice
+        ...
+        Kondowole
+  serial:
+    out: SERIAL
+    inputs:
+      - label
+```
+
+or, you can use path to the label file.
+
+```yaml
+version: 1
+image: runicos/base
+pipeline:
+  image:
+    capability: IMAGE
+    outputs:
+      - type: u8
+        dimensions: [1, 192, 192, 3]
+    args:
+      width: 192
+      height: 192
+      pixel_format: "@PixelFormat::RGB"
+  classify:
+    model: "./food.tflite"
+    inputs:
+      - image
+    outputs:
+      - type: u8
+        dimensions: [1, 2024]
+  most_confident:
+    proc-block: "hotg-ai/proc-blocks@v0.11.3#most_confident_indices"
+    inputs:
+      - classify
+    outputs:
+      - type: U32
+        dimensions: [3]
+    args:
+      count: 3
+  label:
+    proc-block: "hotg-ai/proc-blocks@v0.11.3#label"
+    inputs:
+      - most_confident
+    outputs:
+      - type: UTF8
+        dimensions: [3]
+    args:
+      wordlist: $WORD_LIST
+  serial:
+    out: SERIAL
+    inputs:
+      - label
+
+resources:
+  WORD_LIST:
+    path: ./aiy_food_V1_labelmap.csv
+    type: string
 ```
 
 You should notice the following changes:
+
 1. We have added a block called `most_confident` that is before the `label`
    block. This proc block sorts the highest probability items and we are
    selecting the top 3 (count). All of this is configurable in the Runefile!
@@ -396,18 +441,19 @@ Oh, well looks like the model needs tuning in the future :)
 This iterative way of building and testing Rune demonstrates the composable
 nature of Rune tools making it extremely powerful for machine learning engineers
 to build and deliver a containerized model. This pipeline on edge is what we
-call ***TinyML Ops***. This is how we bring production grade tools for testing,
+call **_TinyML Ops_**. This is how we bring production grade tools for testing,
 repeat builds, and deployment to TinyML.
 
 ## How about on the phone?
+
 Runes are magical - we can deploy this rune on a phone using our Rune app sdk (open source as well!) and you will be able to add the ability to run TF Lite models on the phone.
 
 We have built a mobile app that allows you to test your Runes instantly on the app and evaluate how it performs. This ability to deploy runes immediately on the phone for testing is what makes Rune tools so powerful to build tinyML apps for edge devices. It is all about the speed of testing in a production-like environment.
 
-
 First download the Runic mobile app from the app store.
-* [iOS](https://apps.apple.com/us/app/runic-by-hotg-ai/id1550831458)
-* [Android](https://play.google.com/store/apps/details?id=ai.hotg.runicapp&hl=en_US&gl=US)
+
+- [iOS](https://apps.apple.com/us/app/runic-by-hotg-ai/id1550831458)
+- [Android](https://play.google.com/store/apps/details?id=ai.hotg.runicapp&hl=en_US&gl=US)
 
 Next you need to **serve** the food.rune you just built to be deployed to the phone. In order to do that we are going to use a rune-serve docker image.
 
@@ -442,9 +488,11 @@ Open the URL the serve generated in a browser - example in this case it was http
 This should show a page with QR code in it! You can now scan the QR code using the Runic mobile app to hot load the rune on the phone for testing.
 
 #### Scan
+
 ![Rune Scan](/img/rune-scan.jpeg)
 
 #### Predict
+
 ![Rune predict](/img/rune-predict.jpeg)
 
 And with that you have an end to end tutorial of how to build, run, test, serve, and evaluate a rune on the phone. The world of tinyML just got the same power and tools of cloud ML.
@@ -452,26 +500,28 @@ And with that you have an end to end tutorial of how to build, run, test, serve,
 Resources
 
 You can clone our test-runes repo from here - https://github.com/hotg-ai/test-runes. If you go to the image/food directory you will see all the material you need for this demo including:
-* Runefile.yml
-* food.tflite model
-* food.rune - we have already built this rune for you but feel free to delete and rebuild using steps above
+
+- Runefile.yml
+- food.tflite model
+- food.rune - we have already built this rune for you but feel free to delete and rebuild using steps above
 
 Runes have much more expressive power which we hope to explain more in details using other sections in this docs.
 Feel free to reach out to us ond [discord]](https://discord.gg/gPCNNvRnF4).
-
 
 ## Note on Windows
 
 The tutorial commands were all using a ‘nix system - Mac intel or linux system. Windows also works but the paths in the command cannot be dynamic.
 So here is how it can work on windows:
 
-* Make sure you have installed docker on windows. Specifically you need to ues the following resources:
- - Need to install WSL first - https://docs.microsoft.com/en-us/windows/wsl/install-win10#simplified-installation-for-windows-insiders
- - Then need to install docker on windows - https://docs.docker.com/docker-for-windows/install/
-* Use windows powershell
-* Replace the dynamic path in the docker command like `pwd` with the specific full path
-* Do not use full path like this: D:\mydir\food but it should be /d/mydir/food
-* For example here are the commands to build, run, and serve on windows:
+- Make sure you have installed docker on windows. Specifically you need to ues the following resources:
+
+* Need to install WSL first - https://docs.microsoft.com/en-us/windows/wsl/install-win10#simplified-installation-for-windows-insiders
+* Then need to install docker on windows - https://docs.docker.com/docker-for-windows/install/
+
+- Use windows powershell
+- Replace the dynamic path in the docker command like `pwd` with the specific full path
+- Do not use full path like this: D:\mydir\food but it should be /d/mydir/food
+- For example here are the commands to build, run, and serve on windows:
 
 ```shell
 docker run -v /d/mydir/food:/d/mydir/food -w /d/mydir/food  -i -t tinyverseml/rune-cli /usr/local/bin/rune build Runefile.yaml
