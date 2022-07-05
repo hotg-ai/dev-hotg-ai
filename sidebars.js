@@ -28,35 +28,39 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Forge",
+      label: "Hammer Forge Studio",
       collapsed: true,
       items: [
-        "forge/overview", // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
+        "hammer-forge-studio/overview", // <-- links to an existing template + general workflow (build with canvas, test, deploy, etc.)
         {
           type: "category",
           label: "Forge SDK",
-          items: ["forge/javascript-sdk", "forge/dart-sdk", "forge/native-sdk"],
+          items: [
+            "hammer-forge-studio/javascript-sdk",
+            "hammer-forge-studio/dart-sdk",
+            "hammer-forge-studio/native-sdk",
+          ],
         },
         {
           type: "category",
           label: "Tutorial",
-          items: ["forge/tutorial/lobe_ai"],
+          items: ["hammer-forge-studio/tutorial/lobe_ai"],
         },
         {
           type: "category",
           label: "Studio Pipeline Examples",
           collapsed: true,
           items: [
-            "forge/pipeline/bird_classifier",
-            "forge/pipeline/food",
-            "forge/pipeline/gesture_recognition",
-            "forge/pipeline/inception",
-            "forge/pipeline/mobileNet",
-            "forge/pipeline/person_detection",
-            "forge/pipeline/plant_classifier",
-            "forge/pipeline/yolo",
-            "forge/pipeline/microspeech",
-            "forge/pipeline/mobileBert",
+            "hammer-forge-studio/pipeline/bird_classifier",
+            "hammer-forge-studio/pipeline/food",
+            "hammer-forge-studio/pipeline/gesture_recognition",
+            "hammer-forge-studio/pipeline/inception",
+            "hammer-forge-studio/pipeline/mobileNet",
+            "hammer-forge-studio/pipeline/person_detection",
+            "hammer-forge-studio/pipeline/plant_classifier",
+            "hammer-forge-studio/pipeline/yolo",
+            "hammer-forge-studio/pipeline/microspeech",
+            "hammer-forge-studio/pipeline/mobileBert",
           ],
         },
       ],
